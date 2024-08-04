@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+
+.image {
+    width: 50%;
+    background-image: url(../../assets/fundo.jpg);
+    background-size: cover;
+    background-position: center;
+    display: inline-block;
+}
+
+.forms {
+    display: flex;
+    flex-direction: column;
+}
+
+#password {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+#email {
+    margin-top: 20px;
+}
+
+#name {
+    margin-top: 20px;
+}
+
+#password,
+#email {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginHome {
+    width: 27.1vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+
+
+input {
+    height: 45px;
+    border: solid 2px;
+    border-radius: 6px;
+    width: 27.1vw;
+    padding: 20px;
+    font-weight: bold;
+
+}
+
+input::placeholder {
+    color: #A6A2A2;
+}
+
+input:focus {
+    color: #A6A2A2;
+    padding: 20px;
+}
+
+
+#login {
+    text-decoration: none;
+    font-size: 15px;
+    color: #009C86;
+    transition: all 0.3s ease;
+}
+
+#login:hover {
+    text-decoration: underline;
+}
+
+h2 {
+    /* width: 27.1vw; */
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+h1 {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+button {
+    height: 45px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    background-color: #009C86;
+    border: solid 1px #009C86;
+    color: #FFF;
+    font-weight: bold;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-size: 20px;
+    width: 27.1vw;
+    margin-top: 20px;
+    letter-spacing: -0.33px;
+    transition: 1s;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #7FF1E7;
+    border: solid 1px #7FF1E7;
+    color: #FFF;
+}
+
+@media (max-width: 767px) {
+
+    .container {
+        width: 100%;
+        background-image: url(../../assets/fundo.jpg);
+
+        background-size: cover;
+        background-position: center;
+        display: flex;
+    }
+
+
+    .image {
+        display: none;
+    }
+
+    .login {
+        width: 100%;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+
+    .card {
+        width: 100%;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.8);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2%;
+        border: solid 2px #009C86;
+        border-radius: 8px;
+    }
+
+
+    #logo {
+        width: 50%;
+        /* max-height: 200px; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    input {
+        height: 45px;
+        border: solid 2px;
+        border-radius: 6px;
+        width: 300px;
+        padding: 20px;
+        font-weight: bold;
+
+    }
+
+    button {
+        height: 45px;
+        flex-shrink: 0;
+        border-radius: 6px;
+        background-color: #009C86;
+        border: solid 1px #009C86;
+        color: #FFF;
+        font-weight: bold;
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-size: 20px;
+        width: 300px;
+        margin-top: 20px;
+        letter-spacing: -0.33px;
+        transition: 3s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .forms {
+        display: flex;
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .loginHome {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        width: 300px;
+    }
+
+    /* .logar {
+        width: 300px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+     */
+
+
+    h2,
+    h1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (min-width: 768px),
+(max-width: 1365px) {
+
+    .container {
+        padding: 0;
+        display: flex;
+    }
+
+    .loginHome {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+    }
+
+    .login {
+        padding: 2%;
+        /* width: 50%; */
+        /* margin-left: 50px; */
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .logo {
+        border-radius: 20px;
+        width: 80%;
+        /* width: 40.1vw; */
+        /* height: 55.3vh; */
+        max-width: 80%;
+    }
+
+
+}
+
+@media (min-width: 1366px) {
+
+    .container {
+        padding: 0 auto;
+        /* background-color: rgba(209, 8, 8, 0.438); */
+    }
+
+    .login {
+        padding: 2%;
+        margin-left: 127px;
+        width: 50%;
+        display: flexbox;
+    }
+
+    .logo {
+        border-radius: 20px;
+        max-width: 27.1vw;
+        width: 80%;
+        /* width: 40.1vw;
+        height: 55.3vh;
+        max-width: 60%;
+        max-height: 300px; */
+    }
+
+}
