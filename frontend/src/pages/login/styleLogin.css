@@ -305,4 +305,17 @@ button:hover {
         max-height: 300px; */
   }
 
+
+}
+
+
+
+
+@keyframes animate {
+  from{
+    transform: 0deg;
+  }
+  to{
+    transform: 360deg;
+  }
 }
