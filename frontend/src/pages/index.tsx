@@ -33,7 +33,7 @@ export default function Home() {
       <Head>
         <title>StockPro - Faça seu login</title>
       </Head>
-     
+
 
       <div className={styles.container} >
         <div className={styles.login}>
@@ -42,27 +42,30 @@ export default function Home() {
             <h2 className={styles.subTitulo}>Bem-vindo(a) ao Stock Pro</h2>
             <h1 className={styles.titulo}>Login</h1>
 
-            <div className={styles.forms}>
+            <form onSubmit={handleLogin}>
+              <div className={styles.forms}>
 
-              <Input type="email" required placeholder='Email' id={styles.email} />
 
-              <Input type="password" required id={styles.password} placeholder='Senha' />
-            </div>
+                <Input type="email" required placeholder='Email' id={styles.email} />
 
-            <div className={styles.logar}>
+                <Input type="password" required id={styles.password} placeholder='Senha' />
+              </div>
 
-            <Link href="/signup">
-           <a className={styles.criarConta}>Nao possui uma conta? Cadastre-se</a>
-        </Link>
+              <div className={styles.logar}>
+                <Link href="/signup">
+                  <a className={styles.criarConta}>Nao possui uma conta? Cadastre-se</a>
+                </Link>
+              </div>
 
-             
-            </div>
+              <Button
+                type="submit"
+                loading={false}
+              >Logar</Button>
+            </form>
 
-            <Button
-            type="submit"
-            loading={false}
-          >Logar</Button>
-           
+
+
+
           </div>
         </div>
 
