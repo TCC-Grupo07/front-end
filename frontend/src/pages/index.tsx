@@ -1,4 +1,4 @@
-import { useContext, FormEvent } from 'react'
+import { useContext, FormEvent, useState } from 'react'
 
 import Head from 'next/head'
 import Image from 'next/image';
@@ -17,12 +17,17 @@ import Link from 'next/link';
 export default function Home() {
   const { signIn } = useContext(AuthContext)
 
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const [loading, setLoading] = useState(false)
+
   async function handleLogin(event: FormEvent) {
     event.preventDefault();
 
     let data = {
-      email: "algum@teste.com",
-      password: "123123"
+      email,
+      password
     }
 
     await signIn(data)
@@ -46,9 +51,9 @@ export default function Home() {
               <div className={styles.forms}>
 
 
-                <Input type="email" required placeholder='Email' id={styles.email} />
+                <Input type="email" required placeholder='Email' id={styles.email} value={email} onChange={(e) => setEmail(e.target.value)} />
 
-                <Input type="password" required id={styles.password} placeholder='Senha' />
+                <Input type="password" required id={styles.password} placeholder='Senha' value={password} onChange={(e) => setPassword(e.target.value)} />
               </div>
 
               <div className={styles.logar}>
