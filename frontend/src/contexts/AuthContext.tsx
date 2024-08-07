@@ -1,53 +1,39 @@
-import { createContext, ReactNode, useState } from "react";
-
+import { createContext, ReactNode, useState } from 'react';
 
 type AuthContextData = {
-    user: UserProps;
-    isAuthenticated: boolean;
-    signIn: (credentials: SignInProps) => Promise<void>;
+  user: UserProps;
+  isAuthenticated: boolean;
+  signIn: (credentials: SignInProps) => Promise<void>;
 }
 
 type UserProps = {
-    id: string;
-    name: string;
-    email: string;
+  id: string;
+  name: string;
+  email: string;
 }
-
-
-// type AuthContextData = {
-//     user: UserProps;
-//     isAuthenticated: boolean;
-//     signIn: (credentials: SignInProps) => Promise<void>
-// }
-
-// type UserProps = {
-//     id: string;
-//     name: string;
-//     email: string
-// }
 
 type SignInProps = {
-    email: string;
-    password: string
+  email: string;
+  password: string;
 }
 
-type AuthProvaiderProps = {
-    children: ReactNode
+type AuthProviderProps = {
+  children: ReactNode;
 }
 
 export const AuthContext = createContext({} as AuthContextData)
 
-export function AuthProvaider({ children }: AuthProvaiderProps) {
-    const [user, setUser] = useState<UserProps>()
-    const isAuthenticated = !!user;
+export function AuthProvider({ children }: AuthProviderProps){
+  const [user, setUser] = useState<UserProps>()
+  const isAuthenticated = !!user;
 
-    async function signIn() {
-        alert("Clicou no ligin")
-    }
+  async function signIn(){
+    alert("CLICOU NO LOGIN")
+  }
 
-    return (
-        <AuthContext.Provider value={{user, isAuthenticated, signIn}}>
-            {children}
-        </AuthContext.Provider>
-    )
+  return(
+    <AuthContext.Provider value={{ user, isAuthenticated, signIn }}>
+      {children}
+    </AuthContext.Provider>
+  )
 }

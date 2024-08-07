@@ -1,0 +1,40 @@
+.button{
+  height: 45px;
+  border-radius: 6px;
+  background-color: #009C86;
+  border: solid 1px #009C86;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 20px;
+  width: 27.1vw;
+  margin-top: 20px;
+  letter-spacing: -0.33px;
+  transition: 1s;
+
+  &[disabled]{
+    cursor: not-allowed;
+    svg{
+      animation: animate 2s infinite;
+    }
+  }
+
+  &:hover{
+    background-color: #51b2aa;
+    border: solid 1px #51b2aa;
+    color: #FFF;
+  }
+
+}
+
+.buttonText{
+  color: var(--white);
+}
+
+@keyframes animate{
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}

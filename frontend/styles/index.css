@@ -35,11 +35,7 @@
 }
 
 #email {
-    margin-top: 20px;
-}
-
-#name {
-    margin-top: 20px;
+    margin-top: 35px;
 }
 
 #password,
@@ -49,13 +45,15 @@
     align-items: center;
 }
 
-.loginHome {
-    width: 27.1vw;
+.logar {
+    width: 385px;
     display: flex;
     flex-direction: row;
-    justify-content: left;
-}
+    width: 27.1vw;
+    justify-content: space-between;
+ 
 
+}
 
 input {
     height: 45px;
@@ -76,15 +74,26 @@ input:focus {
     padding: 20px;
 }
 
-
-#login {
+#esqueciSenha {
     text-decoration: none;
     font-size: 15px;
     color: #009C86;
     transition: all 0.3s ease;
 }
 
-#login:hover {
+#criarConta {
+    text-decoration: none;
+    font-size: 15px;
+    color: #009C86;
+    transition: all 0.3s ease;
+
+}
+
+#criarConta:hover {
+   text-decoration: underline;
+}
+
+#esqueciSenha:hover {
     text-decoration: underline;
 }
 
@@ -114,7 +123,6 @@ button {
     margin-top: 20px;
     letter-spacing: -0.33px;
     transition: 1s;
-    cursor: pointer;
 }
 
 button:hover {
@@ -123,12 +131,22 @@ button:hover {
     color: #FFF;
 }
 
+/* .logar {
+    width: 385px;
+    display: flex;
+    flex-direction: row;
+    width: 27.1vw;
+    justify-content: space-between;
+
+} */
+
+
 @media (max-width: 767px) {
 
     .container {
         width: 100%;
         background-image: url(../../assets/fundo.jpg);
-
+    
         background-size: cover;
         background-position: center;
         display: flex;
@@ -208,21 +226,13 @@ button:hover {
         align-items: center;
     }
 
-    .loginHome {
-        display: flex;
-        flex-direction: row;
-        justify-content: left;
-        width: 300px;
-    }
-
-    /* .logar {
+     .logar {
         width: 300px;
         display: flex;
         flex-direction: row;
-        justify-content: center;
-    }
-     */
+        justify-content: space-between;
 
+    } */
 
     h2,
     h1 {
@@ -238,12 +248,6 @@ button:hover {
     .container {
         padding: 0;
         display: flex;
-    }
-
-    .loginHome {
-        display: flex;
-        flex-direction: row;
-        justify-content: left;
     }
 
     .login {
@@ -283,7 +287,6 @@ button:hover {
 
     .logo {
         border-radius: 20px;
-        max-width: 27.1vw;
         width: 80%;
         /* width: 40.1vw;
         height: 55.3vh;
