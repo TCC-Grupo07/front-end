@@ -1,5 +1,7 @@
 import { useContext, FormEvent } from "react"
 
+import "./styleLogin.css"
+
 import Logo from '../../assets/logo.svg'
 
 import { Button } from "../../components/ui/button/index"
@@ -41,7 +43,6 @@ function Login() {
                     </form>
 
                     <div className="logar">
-                        <a id='esqueciSenha' href="#">Esqueci minha senha </a>
                         <a id='criarConta' href='/register'>Criar conta</a>
 
                     </div>
