@@ -16,6 +16,8 @@ import { toast } from "react-toastify"
 
 import Link from 'next/link';
 
+import { canSSRGuest } from "../utils/canSSRGuest"
+
 export default function Home() {
   const { signIn } = useContext(AuthContext)
 
@@ -69,7 +71,7 @@ export default function Home() {
 
               <div className={styles.logar}>
                 <Link className={styles.criarConta} href="/signup">
-                  Nao possui uma conta? Cadastre-se
+                  Nâo possui uma conta? Cadastre-se
                 </Link>
               </div>
 
@@ -93,3 +95,12 @@ export default function Home() {
     </>
   )
 }
+
+
+export const getServerSideProps = canSSRGuest(async (ctx)=>{
+return {
+  props:{
+    
+  }
+}
+})
