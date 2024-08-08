@@ -11,6 +11,8 @@ import { Button } from '../../components/ui/Button'
 
 import { AuthContext } from "../../contexts/AuthContext"
 
+import { toast } from "react-toastify"
+
 import Link from 'next/link';
 
 export default function SignUp() {
@@ -26,7 +28,7 @@ export default function SignUp() {
     event.preventDefault()
 
     if (name === "" || email === "" || password === "") {
-      alert("PREENCHA TODOS OS CAMPOS!")
+      toast.error("PREENCHA TODOS OS CAMPOS")
       return
     }
 
@@ -68,8 +70,8 @@ export default function SignUp() {
               </div>
 
               <div className={styles.logar}>
-                <Link href="/">
-                  <a className={styles.criarConta}>Já possui uma conta? Conecte-se</a>
+                <Link href="/" className={styles.criarConta}>
+                  Já possui uma conta? Conecte-se
                 </Link>
               </div>
 

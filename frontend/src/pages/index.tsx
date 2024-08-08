@@ -12,6 +12,8 @@ import { AuthContext } from '../contexts/AuthContext'
 
 import Logo from "../assets/logo.svg"
 
+import { toast } from "react-toastify"
+
 import Link from 'next/link';
 
 export default function Home() {
@@ -26,7 +28,7 @@ export default function Home() {
     event.preventDefault();
 
     if (email === '' || password === '') {
-      alert("PREENCHA OS DADOS")
+      toast.error("PREENCHA TODOS OS CAMPOS")
       return
     }
 
@@ -66,8 +68,8 @@ export default function Home() {
               </div>
 
               <div className={styles.logar}>
-                <Link href="/signup">
-                  <a className={styles.criarConta}>Nao possui uma conta? Cadastre-se</a>
+                <Link className={styles.criarConta} href="/signup">
+                  Nao possui uma conta? Cadastre-se
                 </Link>
               </div>
 
