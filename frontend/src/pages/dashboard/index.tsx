@@ -18,11 +18,13 @@ import { AuthProvider } from "../../contexts/AuthContext"
 
 import { AuthContext } from "../../contexts/AuthContext"
 
+import { Header } from "../../components/Header";
+
 import { FiLogOut } from "react-icons/fi"
 
 export default function Dashboard() {
 
-    const { signOut, user } = useContext(AuthContext)
+    const {  user } = useContext(AuthContext)
     return (
         <div>
             <Head>
@@ -31,14 +33,14 @@ export default function Dashboard() {
                 </title>
             </Head>
 
+
+
             <div className={styles.container}>
+                <Header />
                 <h1>Olá, {user?.name}. Seja bem vindo(a)</h1>
                 <h2>Login efetuado com sucesso</h2>
 
-                <button onClick={signOut}>
-                    <FiLogOut color="black" size={24} />
-                </button>
-
+               
             </div>
         </div>
     )

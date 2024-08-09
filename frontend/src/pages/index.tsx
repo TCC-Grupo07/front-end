@@ -56,7 +56,7 @@ export default function Home() {
       <div className={styles.container} >
         <div className={styles.login}>
           <div className={styles.card}>
-            <Image src={Logo} alt="Logo Sujeito Pizzaria" className={styles.logo} />
+            <Image src={Logo} alt="Logo StockPro" className={styles.logo} />
             <h2 className={styles.subTitulo}>Bem-vindo(a) ao Stock Pro</h2>
             <h1 className={styles.titulo}>Login</h1>
 
@@ -97,10 +97,10 @@ export default function Home() {
 }
 
 
-export const getServerSideProps = canSSRGuest(async (ctx)=>{
-return {
-  props:{
-    
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+  return {
+    props: {
+
+    }
   }
-}
 })
