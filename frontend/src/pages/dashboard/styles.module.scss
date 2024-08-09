@@ -2,10 +2,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    button {
+        background: transparent;
+        border: 0;
+        transition: transform 0.8s;
+
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
 }
 
-.container h1 {
-    color: black
-
+.container h1  {
+    color: black;
 }
-
