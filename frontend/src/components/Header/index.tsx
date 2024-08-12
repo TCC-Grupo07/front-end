@@ -17,28 +17,26 @@ export function Header() {
 
     const { signOut } = useContext(AuthContext)
     return (
-            <div className={styles.headerContent}>
+        <div className={styles.headerContent}>
 
-                <Link href='/dashboard'>
-                <Image src={Logo} width={190} height={60} alt="Logo do StockPro"/>
-                    {/* <img src='/logo.svg' width={190} height={60} alt="logo do StockPro" /> */}
+            <Link href='/dashboard'>
+                <Image src={Logo} width={190} height={60} alt="Logo do StockPro" className={styles.logo} />
+            </Link>
+
+            <nav className={styles.menuNav}>
+                <Link legacyBehavior href="/sector" >
+                    <a className={styles.link}>Setor</a>
                 </Link>
 
-                <nav className={styles.menuNav}>
-                    <Link legacyBehavior href="/sector">
+                <Link legacyBehavior href="/product" >
+                    <a className={styles.link}>Produtos</a>
+                </Link>
 
-                        <a>Setor</a>
-                    </Link>
-
-                    <Link legacyBehavior href="/suppliers">
-                        <a>Fornecedores</a>
-                    </Link>
-
-                    <button onClick={signOut}>
-                        <FiLogOut color='#000' size={24} />
-                    </button>
-                </nav>
-            </div>
+                <button onClick={signOut}>
+                    <FiLogOut color=' #009C86' size={24} />
+                </button>
+            </nav>
+        </div>
 
     )
 }

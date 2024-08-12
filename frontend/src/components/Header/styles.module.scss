@@ -15,30 +15,38 @@
     img {
         cursor: pointer;
     }
+
+
 }
 
 .menuNav {
     display: flex;
     align-items: center;
-    
+
+
 
     a {
-        color: var(--white);
+        color: #009C86;
+        text-decoration: none;
         padding: 0 0.5rem;
         display: inline-block;
         position: relative;
-        transition: color 0.7s;
+        transition: transform 0.8s;
+        font-weight: 500;
 
         &+a {
             margin-left: 2rem;
         }
 
         &:hover {
-            color: var(--red-900);
+            color: #51b2aa;
+            transform: scale(1.2);
         }
     }
 
+
     button {
+        color: #009C86;
         margin-left: 2rem;
         background: transparent;
         border: 0;
@@ -46,10 +54,8 @@
 
         &:hover {
             transform: scale(1.2);
+            color: #51b2aa;
         }
     }
-
-
-
 
 }

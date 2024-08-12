@@ -29,7 +29,7 @@ export default function Sector() {
 
 
         if (name === '' || description === '') {
-            toast.error("PREENCHA TODOS OS CAMPOS")
+            toast.warning("PREENCHA TODOS OS CAMPOS")
             return
         }
 
