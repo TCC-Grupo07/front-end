@@ -42,22 +42,26 @@ export default function Sector() {
         toast.success("SETOR CADASTRADO COM SUCESSO")
 
 
+
+
     }
     return (
         <>
             <Head>
                 <title>
-                    Novo Setor -- StockPro
+                    Cadastrando Setor -- StockPro
                 </title>
             </Head>
+
+            <Header />
             <div className={styles.container}>
-                <Header />
                 <h1>Novo Setor</h1>
 
                 <form className={styles.form} onSubmit={handleRegisterSector}>
                     <Input
                         type="text"
                         placeholder='Nome do Setor'
+                        className={styles.input}
                         value={name}
                         onChange={(e) => setName(e.target.value)}
 
@@ -71,7 +75,7 @@ export default function Sector() {
                         onChange={(e) => setDescription(e.target.value)}
                     />
 
-                    <Button>
+                    <Button className={styles.button}>
                         Cadastrar
                     </Button>
                 </form>

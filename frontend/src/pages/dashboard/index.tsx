@@ -24,7 +24,7 @@ import { FiLogOut } from "react-icons/fi"
 
 export default function Dashboard() {
 
-    const {  user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     return (
         <div>
             <Head>
@@ -33,14 +33,14 @@ export default function Dashboard() {
                 </title>
             </Head>
 
-
+            <Header />
 
             <div className={styles.container}>
-                <Header />
+
                 <h1>Olá, {user?.name}. Seja bem vindo(a)</h1>
                 <h2>Login efetuado com sucesso</h2>
 
-               
+
             </div>
         </div>
     )

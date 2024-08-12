@@ -17,7 +17,6 @@ export function Header() {
 
     const { signOut } = useContext(AuthContext)
     return (
-        <header className={styles.headerContainer} >
             <div className={styles.headerContent}>
 
                 <Link href='/dashboard'>
@@ -40,6 +39,6 @@ export function Header() {
                     </button>
                 </nav>
             </div>
-        </header>
+
     )
 }
