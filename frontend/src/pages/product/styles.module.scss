@@ -8,7 +8,7 @@
 }
 
 .container h1 {
-    color: var(--white);
+    font-weight: 500;
 }
 
 .form {
@@ -52,9 +52,7 @@
     background-color: #009C86;
     border: solid 1px #009C86;
     color: #FFF;
-    font-weight: bold;
     font-size: 20px;
-    // width: 85%;
     margin-top: 20px;
     letter-spacing: -0.33px;
     transition: 1s;

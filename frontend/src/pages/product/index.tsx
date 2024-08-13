@@ -72,7 +72,7 @@ export default function Product({ categoryList }: CategoryProps) {
             const data = new FormData()
 
             if (name === '' || price === '' || description === '' || imageAvatar === null) {
-                toast.error("PREENCHA TODOS OS CAMPOS!")
+                toast.warning("PREENCHA TODOS OS CAMPOS")
                 return
             }
 
@@ -110,7 +110,7 @@ export default function Product({ categoryList }: CategoryProps) {
             <div>
                 <Header />
                 <main className={styles.container}>
-                    <h1>Novo produto</h1>
+                    <h1>Novo Produto</h1>
 
 
                     <form className={styles.form} onSubmit={handleRegister}>

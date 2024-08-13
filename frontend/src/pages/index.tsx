@@ -30,7 +30,7 @@ export default function Home() {
     event.preventDefault();
 
     if (email === '' || password === '') {
-      toast.error("PREENCHA TODOS OS CAMPOS")
+      toast.warning   ("PREENCHA TODOS OS CAMPOS")
       return
     }
 
