@@ -22,19 +22,19 @@ type ItemProps = {
     name: string
 }
 
-interface CategoryProps {
-    categoryList: ItemProps[];
+interface SectorProps {
+    sectorList: ItemProps[];
 }
 
-export default function Product({ categoryList }: CategoryProps) {
+export default function Product({ sectorList }: SectorProps) {
 
 
 
     const [avatarUrl, setAvatarUrl] = useState('')
     const [imageAvatar, setImageAvatar] = useState(null)
 
-    const [categories, setCategories] = useState(categoryList || [])
-    const [categorySelected, setCategorySelected] = useState(0)
+    const [sectors, setSectors] = useState(sectorList || [])
+    const [sectorSelected, setSectorSelected] = useState(0)
 
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
@@ -58,10 +58,10 @@ export default function Product({ categoryList }: CategoryProps) {
     }
 
     // Quando você seleciona uma nova categoria na lista
-    function handleChangeCategory(event) {
+    function handleChangeSector(event) {
         //console.log('Categoria selecionada', categories[event.target.value])
 
-        setCategorySelected(event.target.value)
+        setSectorSelected(event.target.value)
 
     }
 
@@ -79,7 +79,7 @@ export default function Product({ categoryList }: CategoryProps) {
             data.append('name', name)
             data.append('price', price)
             data.append('description', description)
-            data.append('category_id', categories[categorySelected].id)
+            data.append('sector_id', sectors[sectorSelected].id)
             data.append('file', imageAvatar)
 
             const apiClient = setupAPIClient()
@@ -87,6 +87,9 @@ export default function Product({ categoryList }: CategoryProps) {
             // await apiClient.post('/product', data)
 
             await apiClient.post('/product', data)
+
+
+
 
             toast.success("CADASTRADO COM SUCESSO!")
 
@@ -137,8 +140,8 @@ export default function Product({ categoryList }: CategoryProps) {
 
                         </label>
 
-                        <select value={categorySelected} onChange={handleChangeCategory}>
-                            {categories.map((item, index) => {
+                        <select value={sectorSelected} onChange={handleChangeSector}>
+                            {sectors.map((item, index) => {
                                 return (
                                     <option key={item.id} value={index}>
                                         {item.name}
@@ -193,7 +196,7 @@ export const getServerSideProps = canSSRAuth(async (ctx) => {
 
     return {
         props: {
-            categoryList: response.data
+            sectorList: response.data
         }
     }
 })
