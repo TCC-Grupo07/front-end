@@ -54,7 +54,7 @@ export default function SignUp() {
       <div className={styles.container}>
         <div className={styles.login}>
           <div className={styles.card}>
-            <Image src={Logo} alt="Logo Sujeito Pizzaria" className={styles.logo} />
+            <Image src={Logo} alt="Logo StockPro" className={styles.logo} />
             <h2 className={styles.subTitulo}>Bem-vindo(a) ao Stock Pro</h2>
             <h1 className={styles.titulo}>Cadastro</h1>
 

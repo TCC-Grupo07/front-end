@@ -12,8 +12,6 @@ import { FiUpload } from 'react-icons/fi'
 
 import { setupAPIClient } from '../../services/api'
 
-import Sector from '../sector/index'
-
 import { toast } from 'react-toastify'
 import { api } from '../../services/apiClient'
 
@@ -108,7 +106,7 @@ export default function Product({ sectorList }: SectorProps) {
     return (
         <>
             <Head>
-                <title>Novo Produto - Sujeito Pizzaria</title>
+                <title>Novo Produto - StockPro</title>
             </Head>
             <div>
                 <Header />

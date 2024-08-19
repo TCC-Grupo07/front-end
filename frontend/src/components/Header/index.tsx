@@ -32,6 +32,10 @@ export function Header() {
                     <a className={styles.link}>Produtos</a>
                 </Link>
 
+                <Link legacyBehavior href="/stock/entry" >
+                    <a className={styles.link}>Estoque</a>
+                </Link>
+
                 <button onClick={signOut}>
                     <FiLogOut color=' #009C86' size={24} />
                 </button>
