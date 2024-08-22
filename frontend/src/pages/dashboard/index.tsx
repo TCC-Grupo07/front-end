@@ -38,9 +38,7 @@ export default function Dashboard() {
             <div className={styles.container}>
 
                 <h1>Olá, {user?.name}. Seja bem vindo(a)</h1>
-                <h2>Login efetuado com sucesso</h2>
-
-
+                
             </div>
         </div>
     )
