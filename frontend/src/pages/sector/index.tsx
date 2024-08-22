@@ -42,6 +42,8 @@ export default function Sector() {
         toast.success("SETOR CADASTRADO COM SUCESSO")
 
 
+        setName('')
+        setDescription('')
 
 
     }
@@ -75,7 +77,7 @@ export default function Sector() {
                         onChange={(e) => setDescription(e.target.value)}
                     />
 
-                    <Button className={styles.button}>
+                    <Button className={styles.button} type="submit">
                         Cadastrar
                     </Button>
                 </form>
