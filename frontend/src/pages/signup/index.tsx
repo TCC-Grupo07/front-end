@@ -70,9 +70,10 @@ export default function SignUp() {
               </div>
 
               <div className={styles.logar}>
-                <Link href="/" className={styles.criarConta}>
-                  Já possui uma conta? Conecte-se
-                </Link>
+                <p>Já possui uma conta? <Link href="/" className={styles.criarConta}>
+                  Conecte-se
+                </Link></p>
+
               </div>
 
               <Button

@@ -8,7 +8,7 @@ import { FiLogOut } from 'react-icons/fi'
 
 import { AuthContext } from '../../contexts/AuthContext'
 
-import Logo from "../../assets/logo.svg"
+import Logo from "./logoMenu.svg"
 
 import Image from 'next/image';
 
@@ -20,7 +20,7 @@ export function Header() {
         <div className={styles.headerContent}>
 
             <Link href='/dashboard'>
-                <Image src={Logo} width={190} height={60} alt="Logo do StockPro" className={styles.logo} />
+                <Image src={Logo} width={190} height={60} alt="Logo do StockPro" className={styles.img} />
             </Link>
 
             <nav className={styles.menuNav}>

@@ -30,7 +30,7 @@ export default function Home() {
     event.preventDefault();
 
     if (email === '' || password === '') {
-      toast.warning   ("PREENCHA TODOS OS CAMPOS")
+      toast.warning("PREENCHA TODOS OS CAMPOS")
       return
     }
 
@@ -70,9 +70,10 @@ export default function Home() {
               </div>
 
               <div className={styles.logar}>
-                <Link className={styles.criarConta} href="/signup">
-                  Nâo possui uma conta? Cadastre-se
-                </Link>
+                <p>Não possui uma conta?  <Link className={styles.criarConta} href="/signup">
+                  Cadastre-se
+                </Link></p>
+
               </div>
 
               <Button
