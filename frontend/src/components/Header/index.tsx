@@ -32,7 +32,7 @@ export function Header() {
                     <a className={styles.link}>Produtos</a>
                 </Link>
 
-                <Link legacyBehavior href="/stock/entry" >
+                <Link legacyBehavior href="/stock" >
                     <a className={styles.link}>Estoque</a>
                 </Link>
 

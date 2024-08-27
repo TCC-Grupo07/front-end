@@ -1,0 +1,157 @@
+.container {
+    max-width: 720px;
+    margin: 4rem auto;
+    padding: 0 2 rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.container h1 {
+    font-weight: 500;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+
+
+    textarea {
+        width: 100%;
+        min-height: 100px;
+        resize: none;
+        padding: 0.5rem;
+    }
+
+    select {
+        width: 100%;
+        height: 40px;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+        color: var(--white);
+        // background-color: var(--dark-900);
+        border: 1px solid black;
+        padding: 0 0.5rem;
+    }
+}
+
+.input {
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    color: black;
+    // background-color: ;
+    border: 1px solid black;
+    height: 40px;
+    padding: 0 0.5rem;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.buttonEntry {
+    width: 168px;
+    height: 45px;
+    border-radius: 6px;
+    background-color: #009C86;
+    border: solid 1px #009C86;
+    color: #FFF;
+    font-size: 20px;
+    margin-top: 20px;
+    letter-spacing: -0.33px;
+    transition: 1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+
+
+
+    &[disabled] {
+        cursor: not-allowed;
+
+        svg {
+            animation: animate 2s infinite;
+        }
+    }
+
+    &:hover {
+        background-color: #51b2aa;
+        border: solid 1px #51b2aa;
+        color: #FFF;
+    }
+}
+
+.buttonExit {
+    width: 168px;
+    height: 45px;
+    border-radius: 6px;
+    background-color: #009C86;
+    border: solid 1px #009C86;
+    color: #FFF;
+    font-size: 20px;
+    margin-top: 20px;
+    letter-spacing: -0.33px;
+    transition: 1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    margin-left: 40px;
+
+
+
+    &[disabled] {
+        cursor: not-allowed;
+
+        svg {
+            animation: animate 2s infinite;
+        }
+    }
+
+    &:hover {
+        background-color: #51b2aa;
+        border: solid 1px #51b2aa;
+        color: #FFF;
+    }
+
+}
+
+
+.labelAvatar {
+    width: 100%;
+    height: 280px;
+    // background-color: var(--dark-900);
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: solid 1px black;
+
+    input {
+        display: none;
+    }
+
+    span {
+        z-index: 99;
+        position: absolute;
+        opacity: 0.7;
+        transition: all 0.5s;
+    }
+
+    span:hover {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+.preview {
+    //     width: 100%;
+    //     height: 100%;
+    //     // object-fit: cover;
+    //     border-radius: 0.5rem;
+}
