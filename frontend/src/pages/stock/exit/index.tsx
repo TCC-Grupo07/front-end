@@ -24,7 +24,7 @@ interface ProductProps {
     productList: ProductsProps[];
 }
 
-export default function Entry({ sectortList, productList }: SectorProps & ProductProps) {
+export default function Exit({ sectortList, productList }: SectorProps & ProductProps) {
 
     const [name, setName] = useState('')
     const [sectors, setSectors] = useState(sectortList || [])
@@ -52,6 +52,8 @@ export default function Entry({ sectortList, productList }: SectorProps & Produc
                 return
             }
 
+
+
             const data = {
                 quantidade,
                 product_id: products[productSelected].id,
@@ -61,12 +63,13 @@ export default function Entry({ sectortList, productList }: SectorProps & Produc
             console.log("Enviando os seguintes dados:", data)
 
             const apiClient = setupAPIClient()
-            await apiClient.post('/entry', data)
+            await apiClient.post('/output', data)
 
             toast.success("CADASTRADO COM SUCESSO!")
             setQuantidade('')
 
         } catch (err) {
+
             console.error("Erro ao cadastrar: ", err.response ? err.response.data : err)
             toast.error("Ops... ERRO AO CADASTRAR")
         }

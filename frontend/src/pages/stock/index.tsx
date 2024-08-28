@@ -36,10 +36,10 @@ export default function Stock() {
             <div>
                 <Header />
                 <main className={styles.container}>
-                    <h1>Estoque</h1>
+
 
                     <div className={styles.buttons}>
-
+                        <h1>Estoque</h1>
                         <Link href="/stock/entry" className={styles.buttonEntry}>
                             Entrada
                         </Link>

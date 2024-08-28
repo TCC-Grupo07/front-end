@@ -58,8 +58,6 @@ export default function Entry({ sectortList, productList }: SectorProps & Produc
                 sector_id: sectors[sectorSelected].id
             }
 
-            console.log("Enviando os seguintes dados:", data)
-
             const apiClient = setupAPIClient()
             await apiClient.post('/entry', data)
 

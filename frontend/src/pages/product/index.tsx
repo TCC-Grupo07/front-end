@@ -37,6 +37,7 @@ export default function Product({ sectorList }: SectorProps) {
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
     const [description, setDescription] = useState('')
+    const [quantidadeMin, setQuantidadeMin] = useState('')
 
     function handleFile(e: ChangeEvent<HTMLInputElement>) {
         if (!e.target.files) {
@@ -69,7 +70,7 @@ export default function Product({ sectorList }: SectorProps) {
         try {
             const data = new FormData()
 
-            if (name === '' || price === '' || description === '' || imageAvatar === null) {
+            if (name === '' || price === '' || description === '' || imageAvatar === null || quantidadeMin === '') {
                 toast.warning("PREENCHA TODOS OS CAMPOS")
                 return
             }
@@ -79,6 +80,7 @@ export default function Product({ sectorList }: SectorProps) {
             data.append('description', description)
             data.append('sector_id', sectors[sectorSelected].id)
             data.append('file', imageAvatar)
+            data.append('quantidadeMin', quantidadeMin)
 
             const apiClient = setupAPIClient()
 
@@ -100,7 +102,9 @@ export default function Product({ sectorList }: SectorProps) {
         setPrice('')
         setDescription('')
         setAvatarUrl('')
+        setQuantidadeMin('')
         setImageAvatar(null)
+
     }
 
     return (
@@ -162,6 +166,14 @@ export default function Product({ sectorList }: SectorProps) {
                             className={styles.input}
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
+                        />
+
+                        <input
+                            type="number"
+                            placeholder="Quantidade Minima"
+                            className={styles.input}
+                            value={quantidadeMin}
+                            onChange={(e) => setQuantidadeMin(e.target.value)}
                         />
 
                         <textarea
