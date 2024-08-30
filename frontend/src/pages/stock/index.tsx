@@ -38,42 +38,48 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                             Saída
                         </Link>
                     </div>
+
                     <div className={styles.products}>
-                        <h2>Produtos</h2>
-                        {products.length === 0 ? (
-                            <p>Nenhum produto encontrado.</p>
-                        ) : (
-                            <table className={styles.table}>
-                                <thead>
-                                    <tr>
-                                        <th>Produto</th>
-                                        <th>Descrição</th>
-                                        <th>Quantidade Mínima</th>
-                                        <th>Quantidade no Estoque</th>
-                                        <th>Preço</th>
-                                        <th>Banner</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {products.map((product) => (
-                                        <tr key={product.id}>
-                                            <td>{product.name}</td>
-                                            <td>{product.description}</td>
-                                            <td>{product.quantidadeMin}</td>
-                                            <td>{product.quantidade}</td>
-                                            <td>R$ {product.price}</td>
-                                            <td>
-                                                <img
-                                                    src={`/temp/images/${product.banner}`} // Caminho relativo ao diretório public
-                                                    alt={product.name}
-                                                    className={styles.bannerImage}
-                                                />
-                                            </td>
+                        <div className={styles.tabela}>
+                            <h2>Produtos</h2>
+                            {products.length === 0 ? (
+                                <p>Nenhum produto encontrado.</p>
+                            ) : (
+
+                                <table className={styles.table}>
+                                    <thead>
+                                        <tr>
+                                            <th>Produto</th>
+                                            <th>Descrição</th>
+                                            <th>Quantidade Mínima</th>
+                                            <th>Quantidade no Estoque</th>
+                                            <th>Preço</th>
+                                            <th>Banner</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        )}
+                                    </thead>
+
+                                    <tbody>
+                                        {products.map((product) => (
+                                            <tr key={product.id}>
+                                                <td>{product.name}</td>
+                                                <td>{product.description}</td>
+                                                <td>{product.quantidadeMin}</td>
+                                                <td>{product.quantidade}</td>
+                                                <td>R$ {product.price}</td>
+                                                <td>
+                                                    <img
+                                                        src={`/temp/images/${product.banner}`} // Caminho relativo ao diretório public
+                                                        alt={product.name}
+                                                        className={styles.bannerImage}
+                                                    />
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+
+                            )}
+                        </div>
                     </div>
                 </main>
             </div>
