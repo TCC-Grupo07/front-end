@@ -152,12 +152,6 @@
     }
 }
 
-.preview {
-    //     width: 100%;
-    //     height: 100%;
-    //     // object-fit: cover;
-    //     border-radius: 0.5rem;
-}
 
 
 // styles.module.scss
@@ -175,15 +169,33 @@
     text-align: left;
 }
 
-.table th {
-    background-color: #f4f4f4;
-}
-
 .bannerImage {
     width: 100px;
     height: auto;
+    border-radius: 50%;
 }
 
 .tabela {
     margin-left: 50%;
+}
+
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 20px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.table th,
+.table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #b0b8b6;
+    color: #333;
 }

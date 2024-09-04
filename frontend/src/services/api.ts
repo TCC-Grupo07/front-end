@@ -8,7 +8,7 @@ export function setupAPIClient(ctx = undefined) {
 
     const api = axios.create({
 
-        baseURL: 'https://3333-tccgrupo07-backend-8prihpstm66.ws-us115.gitpod.io',
+        baseURL: 'https://3333-tccgrupo07-backend-imzeo1l7dew.ws-us116.gitpod.io',
 
         headers: {
             Authorization: `Bearer ${cookies['@nextauth.token']}`
