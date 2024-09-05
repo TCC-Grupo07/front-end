@@ -264,6 +264,9 @@ import { setupAPIClient } from '../../services/api';
 import styles from "./styles.module.scss";
 import Link from 'next/link';
 
+let url = "https://3333-tccgrupo07-backend-imzeo1l7dew.ws-us116.gitpod.io"
+
+
 interface Product {
     id: string;
     name: string;
@@ -327,7 +330,7 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                             <h2>Produtos</h2>
                             <div className={styles.filter}>
                                 <h2>Filtrar por setor</h2>
-                                <select 
+                                <select
                                     id="sector"
                                     value={selectedSector}
                                     onChange={(e) => setSelectedSector(e.target.value)}
@@ -363,7 +366,7 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                                                 <td>R$ {product.price}</td>
                                                 <td>
                                                     <img
-                                                        src={`https://3333-tccgrupo07-backend-imzeo1l7dew.ws-us116.gitpod.io/files/${product.banner}`}
+                                                        src={`${url}/files/${product.banner}`}
                                                         alt={product.name}
                                                         className={styles.bannerImage}
                                                     />

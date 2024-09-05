@@ -3,12 +3,18 @@ import { parseCookies } from 'nookies'
 import { AuthTokenError } from "./errors/AuthTokenError"
 import { signOut } from "../contexts/AuthContext"
 
+let url = "https://3333-tccgrupo07-backend-imzeo1l7dew.ws-us116.gitpod.io"
+
+
+
 export function setupAPIClient(ctx = undefined) {
     let cookies = parseCookies(ctx)
 
+
+
     const api = axios.create({
 
-        baseURL: 'https://3333-tccgrupo07-backend-imzeo1l7dew.ws-us116.gitpod.io',
+        baseURL: url,
 
         headers: {
             Authorization: `Bearer ${cookies['@nextauth.token']}`
