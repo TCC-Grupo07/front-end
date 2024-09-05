@@ -139,8 +139,8 @@
 }
 
 .table th {
-    background-color: #b0b8b6;
-    color: #333;
+    background-color:  #009C86;
+    color: #ffffff;
 }
 
 .bannerImage {
@@ -152,6 +152,6 @@
     &:hover {
 
         transform: scale(1.15);
-        rotate: -360deg;
+        border-radius: 20px;
     }
 }
