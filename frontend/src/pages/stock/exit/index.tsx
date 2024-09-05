@@ -1,10 +1,10 @@
-import Head from 'next/head'
-import { ChangeEvent, useState, FormEvent } from 'react'
-import styles from "./styles.module.scss"
-import { canSSRAuth } from '../../../utils/canSSRAuth'
-import { Header } from '../../../components/Header'
-import { setupAPIClient } from '../../../services/api'
-import { toast } from 'react-toastify'
+import Head from 'next/head';
+import { ChangeEvent, useState, useEffect, FormEvent } from 'react';
+import styles from "./styles.module.scss";
+import { canSSRAuth } from '../../../utils/canSSRAuth';
+import { Header } from '../../../components/Header';
+import { setupAPIClient } from '../../../services/api';
+import { toast } from 'react-toastify';
 
 type ItemProps = {
     id: string;
@@ -14,6 +14,7 @@ type ItemProps = {
 type ProductsProps = {
     id: string;
     name: string;
+    sector_id: string; // Adicione esta propriedade se necessário
 };
 
 interface SectorProps {
@@ -25,56 +26,61 @@ interface ProductProps {
 }
 
 export default function Exit({ sectortList, productList }: SectorProps & ProductProps) {
+    const [sectors, setSectors] = useState(sectortList || []);
+    const [products, setProducts] = useState(productList || []);
+    const [filteredProducts, setFilteredProducts] = useState<ProductsProps[]>([]);
+    const [sectorSelected, setSectorSelected] = useState<string>(''); // Atualizado para string
+    const [productSelected, setProductSelected] = useState<string>(''); // Atualizado para string
+    const [quantidade, setQuantidade] = useState('');
 
-    const [name, setName] = useState('')
-    const [sectors, setSectors] = useState(sectortList || [])
-    const [products, setProducts] = useState(productList || [])
-    const [sectorSelected, setSectorSelected] = useState(0)
-    const [productSelected, setProductSelected] = useState(0)
-    const [quantidade, setQuantidade] = useState('')
+    useEffect(() => {
+        if (sectorSelected === '') {
+            // Se nenhum setor estiver selecionado, mostre todos os produtos
+            setFilteredProducts(products);
+        } else {
+            // Filtre os produtos com base no setor selecionado
+            const filtered = products.filter(product => product.sector_id === sectorSelected);
+            setFilteredProducts(filtered);
+        }
+    }, [sectorSelected, products]);
 
-    // Quando você seleciona um setor na lista
     function handleChangeSector(event: ChangeEvent<HTMLSelectElement>) {
-        setSectorSelected(Number(event.target.value))
+        setSectorSelected(event.target.value);
     }
 
-    // Quando você seleciona um produto na lista 
     function handleChangeProduct(event: ChangeEvent<HTMLSelectElement>) {
-        setProductSelected(Number(event.target.value))
+        setProductSelected(event.target.value);
     }
 
     async function handleRegister(event: FormEvent) {
-        event.preventDefault()
+        event.preventDefault();
 
         try {
             if (quantidade === '') {
-                toast.warning("PREENCHA TODOS OS CAMPOS")
-                return
+                toast.warning("PREENCHA TODOS OS CAMPOS");
+                return;
             }
-
-
 
             const data = {
                 quantidade,
-                product_id: products[productSelected].id,
-                sector_id: sectors[sectorSelected].id
-            }
+                product_id: productSelected,
+                sector_id: sectorSelected
+            };
 
-            console.log("Enviando os seguintes dados:", data)
 
-            const apiClient = setupAPIClient()
-            await apiClient.post('/output', data)
 
-            toast.success("CADASTRADO COM SUCESSO!")
-            setQuantidade('')
+            const apiClient = setupAPIClient();
+            await apiClient.post('/output', data);
+
+            toast.success("SAÍDA FEITA COM SUCESSO!");
+            setQuantidade('');
 
         } catch (err) {
-
-            console.error("Erro ao cadastrar: ", err.response ? err.response.data : err)
-            toast.error("Ops... ERRO AO CADASTRAR")
+            console.error("Erro ao cadastrar: ", err.response ? err.response.data : err);
+            toast.error("Ops... ERRO AO CADASTRAR");
         }
 
-        Number(quantidade)
+        Number(quantidade);
     }
 
     return (
@@ -89,16 +95,18 @@ export default function Exit({ sectortList, productList }: SectorProps & Product
 
                     <form className={styles.form} onSubmit={handleRegister}>
                         <select value={sectorSelected} onChange={handleChangeSector}>
-                            {sectors.map((item, index) => (
-                                <option key={item.id} value={index}>
+                            <option value="">Selecione um setor</option>
+                            {sectors.map((item) => (
+                                <option key={item.id} value={item.id}>
                                     {item.name}
                                 </option>
                             ))}
                         </select>
 
                         <select value={productSelected} onChange={handleChangeProduct}>
-                            {products.map((item, index) => (
-                                <option key={item.id} value={index}>
+                            <option value="">Selecione um produto</option>
+                            {filteredProducts.map((item) => (
+                                <option key={item.id} value={item.id}>
                                     {item.name}
                                 </option>
                             ))}
@@ -119,28 +127,28 @@ export default function Exit({ sectortList, productList }: SectorProps & Product
                 </main>
             </div>
         </>
-    )
+    );
 }
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
     try {
-        const apiClient = setupAPIClient(ctx)
-        const response = await apiClient.get('/sector')
-        const produto = await apiClient.get('/product')
+        const apiClient = setupAPIClient(ctx);
+        const response = await apiClient.get('/sector');
+        const produto = await apiClient.get('/product');
 
         return {
             props: {
                 sectortList: response.data,
                 productList: produto.data,
             },
-        }
+        };
     } catch (error) {
-        console.error("Error in canSSRAuth:", error)
+        console.error("Error in canSSRAuth:", error);
         return {
             redirect: {
                 destination: '/',
                 permanent: false,
             },
-        }
+        };
     }
-})
+});
