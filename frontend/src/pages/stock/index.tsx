@@ -6,7 +6,7 @@ import { setupAPIClient } from '../../services/api';
 import styles from "./styles.module.scss";
 import Link from 'next/link';
 
-let url = "https://3333-tccgrupo07-backend-f6pedsjckd1.ws-us116.gitpod.io"
+let url = "https://3333-tccgrupo07-backend-82rzsowqas8.ws-us116.gitpod.io"
 
 
 interface Product {

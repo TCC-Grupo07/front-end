@@ -3,7 +3,7 @@ import { parseCookies } from 'nookies'
 import { AuthTokenError } from "./errors/AuthTokenError"
 import { signOut } from "../contexts/AuthContext"
 
-let url = "https://3333-tccgrupo07-backend-f6pedsjckd1.ws-us116.gitpod.io"
+let url = "https://3333-tccgrupo07-backend-82rzsowqas8.ws-us116.gitpod.io"
 
 
 
