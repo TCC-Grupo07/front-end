@@ -5,9 +5,11 @@ import { Header } from '../../components/Header';
 import { setupAPIClient } from '../../services/api';
 import styles from "./styles.module.scss";
 import Link from 'next/link';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css'; // Adicione o CSS do SweetAlert2
 
-let url = "https://3333-tccgrupo07-backend-82rzsowqas8.ws-us116.gitpod.io"
-
+let url = "https://bug-free-space-enigma-p45j654vqpxf4j6-3333.app.github.dev";
 
 interface Product {
     id: string;
@@ -16,7 +18,7 @@ interface Product {
     price: string;
     banner: string;
     quantidadeMin: string;
-    sector_id: string; // Adicionado campo setor
+    sector_id: string;
 }
 
 interface StockProps {
@@ -26,9 +28,10 @@ interface StockProps {
 const Stock: React.FC<StockProps> = ({ products }) => {
     const [selectedSector, setSelectedSector] = useState<string>('Todos');
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+    const [allProducts, setAllProducts] = useState<Product[]>(products);
 
     // Agrupar produtos por setor
-    const groupedProducts = products.reduce((acc: { [key: string]: Product[] }, product) => {
+    const groupedProducts = allProducts.reduce((acc: { [key: string]: Product[] }, product) => {
         const sector = product.sector_id || "Desconhecido"; // Valor padrão se setor for indefinido
         (acc[sector] = acc[sector] || []).push(product);
         return acc;
@@ -40,14 +43,44 @@ const Stock: React.FC<StockProps> = ({ products }) => {
     useEffect(() => {
         // Filtrar e ordenar produtos com base no setor selecionado
         let productsToDisplay = selectedSector === 'Todos'
-            ? products
+            ? allProducts
             : groupedProducts[selectedSector] || [];
 
         // Ordenar produtos por nome em ordem alfabética
         productsToDisplay.sort((a, b) => a.name.localeCompare(b.name));
 
         setFilteredProducts(productsToDisplay);
-    }, [selectedSector, products, groupedProducts]);
+    }, [selectedSector, allProducts, groupedProducts]);
+
+    // Função para deletar produto com SweetAlert2
+    const handleDelete = async (product_id: string, product_name: string) => {
+        const result = await Swal.fire({
+            title: `Você tem certeza?`,
+            text: `Deseja deletar o produto "${product_name}"? Isso removerá as entradas e as saídas do estoque deste produto `,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#009C86',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, deletar!',
+            cancelButtonText: 'Cancelar',
+        });
+
+        if (result.isConfirmed) {
+            try {
+                const apiClient = setupAPIClient();
+                await apiClient.delete(`/product`, { params: { product_id } });
+
+                // Atualizar a lista de produtos após deletar
+                const updatedProducts = allProducts.filter(product => product.id !== product_id);
+                setAllProducts(updatedProducts);
+
+                toast.success('Produto removido com sucesso!');
+            } catch (error) {
+                toast.error('Erro ao remover o produto.');
+                console.error("Error deleting product:", error);
+            }
+        }
+    };
 
     return (
         <>
@@ -57,7 +90,6 @@ const Stock: React.FC<StockProps> = ({ products }) => {
             <div>
                 <Header />
                 <div className={styles.buttons}>
-
                     <Link href="/stock/entry" className={styles.buttonEntry}>
                         Entrada
                     </Link>
@@ -67,7 +99,6 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                 </div>
                 <main className={styles.container}>
                     <h1>Estoque</h1>
-
 
                     <div className={styles.products}>
                         <div className={styles.filter}>
@@ -87,9 +118,6 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                         </div>
                         <h2>Produtos</h2>
                         <div className={styles.tabela}>
-
-
-
                             {filteredProducts.length === 0 ? (
                                 <p>Nenhum produto encontrado.</p>
                             ) : (
@@ -101,9 +129,9 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                                             <th>Quantidade no Estoque</th>
                                             <th>Preço</th>
                                             <th>Imagem</th>
+                                            <th>Ações</th>
                                         </tr>
                                     </thead>
-
                                     <tbody>
                                         {filteredProducts.map((product) => (
                                             <tr key={product.id}>
@@ -117,6 +145,14 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                                                         alt={product.name}
                                                         className={styles.bannerImage}
                                                     />
+                                                </td>
+                                                <td>
+                                                    <button
+                                                        className={styles.deleteButton}
+                                                        onClick={() => handleDelete(product.id, product.name)}
+                                                    >
+                                                        Deletar
+                                                    </button>
                                                 </td>
                                             </tr>
                                         ))}
