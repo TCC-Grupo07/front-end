@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css'; // Adicione o CSS do SweetAlert2
 
-let url = "https://bug-free-space-enigma-p45j654vqpxf4j6-3333.app.github.dev";
+let url = "https://urban-broccoli-gjv4pvj9w6phjgv-3333.app.github.dev/";
 
 interface Product {
     id: string;

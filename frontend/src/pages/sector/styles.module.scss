@@ -16,6 +16,99 @@
 
 }
 
+/* Estilos do modal */
+.modal {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.modal button {
+    padding: 8px 8px;
+
+    background-color: #D33;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal button:hover {
+    background-color: #D33;
+}
+
+/* Estilos para a tabela */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.table th,
+.table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.table td {
+    font-size: 16px;
+}
+
+/* Responsividade para tabela e modal */
+@media (max-width: 767px) {
+    .modal {
+        max-width: 90%;
+    }
+
+    .table,
+    .table th,
+    .table td {
+        font-size: 14px;
+    }
+
+    .input,
+    .button {
+        width: 100%;
+    }
+}
+
+
 
 .input {
     display: flex;
@@ -45,6 +138,30 @@
         // font-weight: bold;
 
     }
+}
+
+.buttonSetores {
+    height: 45px;
+    border-radius: 6px;
+    background: none;
+    border: none;
+    color: #009C86;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 20px;
+    width: 85%;
+    margin-top: 20px;
+    letter-spacing: -0.33px;
+    transition: 1s;
+
+    &[disabled] {
+        cursor: not-allowed;
+
+        svg {
+            animation: animate 2s infinite;
+        }
+    }
+
 }
 
 .button {
