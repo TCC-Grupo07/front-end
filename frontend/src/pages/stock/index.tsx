@@ -7,9 +7,9 @@ import styles from "./styles.module.scss";
 import Link from 'next/link';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css'; // Adicione o CSS do SweetAlert2
+import 'sweetalert2/dist/sweetalert2.min.css';
 
-let url = "https://urban-broccoli-gjv4pvj9w6phjgv-3333.app.github.dev/";
+let url = "https://urban-broccoli-gjv4pvj9w6phjgv-3333.app.github.dev";
 
 interface Product {
     id: string;
@@ -18,7 +18,10 @@ interface Product {
     price: string;
     banner: string;
     quantidadeMin: string;
-    sector_id: string;
+    sector: {
+        id: string;
+        name: string;  // Nome do setor
+    };
 }
 
 interface StockProps {
@@ -30,15 +33,15 @@ const Stock: React.FC<StockProps> = ({ products }) => {
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
     const [allProducts, setAllProducts] = useState<Product[]>(products);
 
-    // Agrupar produtos por setor
+    // Agrupar produtos por nome do setor
     const groupedProducts = allProducts.reduce((acc: { [key: string]: Product[] }, product) => {
-        const sector = product.sector_id || "Desconhecido"; // Valor padrão se setor for indefinido
-        (acc[sector] = acc[sector] || []).push(product);
+        const sectorName = product.sector?.name || "Desconhecido"; // Usar o nome do setor, com fallback para "Desconhecido"
+        (acc[sectorName] = acc[sectorName] || []).push(product);
         return acc;
     }, {});
 
-    // Obter lista de setores únicos
-    const sectors = ['Todos', ...Object.keys(groupedProducts)];
+    // Obter lista de setores únicos e ordenar em ordem alfabética
+    const sectors = ['Todos', ...Object.keys(groupedProducts).sort((a, b) => a.localeCompare(b))];
 
     useEffect(() => {
         // Filtrar e ordenar produtos com base no setor selecionado
@@ -74,9 +77,9 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                 const updatedProducts = allProducts.filter(product => product.id !== product_id);
                 setAllProducts(updatedProducts);
 
-                toast.success('Produto removido com sucesso!');
+                toast.success('PRODUTO REMOVIDO COM SUCESSO');
             } catch (error) {
-                toast.error('Erro ao remover o produto.');
+                toast.error('ERRO AO REMOVER O PRODUTO');
                 console.error("Error deleting product:", error);
             }
         }
@@ -89,20 +92,22 @@ const Stock: React.FC<StockProps> = ({ products }) => {
             </Head>
             <div>
                 <Header />
-                <div className={styles.buttons}>
-                    <Link href="/stock/entry" className={styles.buttonEntry}>
-                        Entrada
-                    </Link>
-                    <Link href="/stock/exit" className={styles.buttonExit}>
-                        Saída
-                    </Link>
-                </div>
+
                 <main className={styles.container}>
-                    <h1>Estoque</h1>
+
+                    <div className={styles.buttons}>
+                        <h1>Estoque</h1>
+                        <Link href="/stock/entry" className={styles.buttonEntry}>
+                            Entrada
+                        </Link>
+                        <Link href="/stock/exit" className={styles.buttonExit}>
+                            Saída
+                        </Link>
+                    </div>
 
                     <div className={styles.products}>
                         <div className={styles.filter}>
-                            <h2>Filtrar por setor</h2>
+                            <h2 className={styles.filtrar}>Filtrar por setor</h2>
                             <select
                                 id="sector"
                                 value={selectedSector}
@@ -116,7 +121,6 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                                 ))}
                             </select>
                         </div>
-                        <h2>Produtos</h2>
                         <div className={styles.tabela}>
                             {filteredProducts.length === 0 ? (
                                 <p>Nenhum produto encontrado.</p>
