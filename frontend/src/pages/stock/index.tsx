@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
-let url = "https://urban-broccoli-gjv4pvj9w6phjgv-3333.app.github.dev";
+let url = "https://3333-tccgrupo07-backend-nbleekv05qr.ws-us116.gitpod.io";
 
 interface Product {
     id: string;
@@ -193,5 +193,3 @@ export const getServerSideProps = canSSRAuth(async (ctx) => {
 });
 
 export default Stock;
-
-
