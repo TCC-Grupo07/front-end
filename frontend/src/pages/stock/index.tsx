@@ -193,3 +193,5 @@ export const getServerSideProps = canSSRAuth(async (ctx) => {
 });
 
 export default Stock;
+
+
