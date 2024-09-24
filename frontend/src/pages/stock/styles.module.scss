@@ -45,6 +45,35 @@
 
     }
 
+    .editButton {
+        height: 45px;
+        border-radius: 6px;
+        background-color: rgb(20, 129, 238);
+        border: solid 1px rgb(20, 129, 238);
+        color: #FFF;
+        font-weight: bold;
+        font-size: 20px;
+        width: 80%;
+        margin-top: 20px;
+        letter-spacing: -0.33px;
+        transition: 1s;
+
+        &[disabled] {
+            cursor: not-allowed;
+
+            svg {
+                animation: animate 2s infinite;
+            }
+        }
+
+        &:hover {
+            background-color: rgb(81, 158, 235);
+            border: solid 1px rgb(81, 158, 235);
+            color: #FFF;
+        }
+
+    }
+
     .buttonText {
         color: var(--white);
     }
@@ -227,4 +256,105 @@
     margin-top: 40px;
     margin-bottom: 10px;
     font-size: 16px;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 1000; // Certifique-se de que o modal esteja acima de outros elementos
+    width: 32rem; // Largura do modal
+    text-align: center;
+
+    .buttonFechar {
+
+        background-color: #d33; // Cor de fundo dos botões
+        color: white; // Cor do texto
+        border: none;
+        border-radius: 4px;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 5px;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: darken(#d33, 10%); // Efeito hover
+        }
+
+        &.cancel {
+            background-color: #d33; // Cor do botão cancelar
+        }
+
+        &.cancel:hover {
+            background-color: darken(#d33, 10%); // Efeito hover para o botão cancelar
+        }
+    }
+
+
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        text-align: left;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+
+        &:focus {
+            border-color: #009C86; // Cor de foco
+            outline: none; // Remove contorno padrão
+        }
+    }
+
+
+
+    button {
+        background-color: #009C86; // Cor de fundo dos botões
+        color: white; // Cor do texto
+        border: none;
+        border-radius: 4px;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 5px;
+        transition: background-color 0.3s;
+
+
+        &:hover {
+            background-color: darken(#009C86, 10%); // Efeito hover
+        }
+
+        &.cancel {
+            background-color: #d33; // Cor do botão cancelar
+        }
+
+        &.cancel:hover {
+            background-color: darken(#d33, 10%); // Efeito hover para o botão cancelar
+        }
+    }
+
+
+    // Estilos de fundo escurecido quando o modal é exibido
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5); // Fundo escuro com opacidade
+        z-index: 999; // Certifique-se de que o fundo esteja abaixo do modal
+    }
 }

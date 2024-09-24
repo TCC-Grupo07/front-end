@@ -109,6 +109,7 @@ export default function Sector() {
                 <h1>Novo Setor</h1>
 
                 <form className={styles.form} onSubmit={handleRegisterSector}>
+                    <h3>Nome</h3>
                     <Input
                         type="text"
                         placeholder='Nome do Setor'
@@ -116,7 +117,7 @@ export default function Sector() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
-
+                    <h3>Descrição</h3>
                     <Input
                         type="text"
                         placeholder='Descrição do Setor'
@@ -129,7 +130,7 @@ export default function Sector() {
                         Cadastrar
                     </Button>
 
-                    <Button className={styles.buttonSetores} type="button" onClick={openModal}>
+                    <Button className={styles.button} type="button" onClick={openModal}>
                         Ver Setores
                     </Button>
                 </form>

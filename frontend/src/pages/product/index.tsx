@@ -90,6 +90,7 @@ export default function Product({ sectorList }: SectorProps) {
 
                     <form className={styles.form} onSubmit={handleRegister}>
 
+                        <h3>Foto</h3>
                         <label className={styles.labelAvatar}>
                             <span>
                                 <FiUpload size={30} color='#000' />
@@ -106,6 +107,7 @@ export default function Product({ sectorList }: SectorProps) {
                             )}
                         </label>
 
+                        <h3>Setor</h3>
                         <select value={sectorSelected} onChange={handleChangeSector}>
                             {sectors.map((item, index) => {
                                 return (
@@ -115,7 +117,7 @@ export default function Product({ sectorList }: SectorProps) {
                                 )
                             })}
                         </select>
-
+                        <h3>Nome</h3>
                         <input
                             type="text"
                             placeholder="Digite o nome do produto"
@@ -123,7 +125,7 @@ export default function Product({ sectorList }: SectorProps) {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
-
+                        <h3>Preço</h3>
                         <input
                             type="number"
                             placeholder="Preço do produto"
@@ -131,7 +133,7 @@ export default function Product({ sectorList }: SectorProps) {
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
                         />
-
+                        <h3>Quantidade Mínima</h3>
                         <input
                             type="number"
                             placeholder="Quantidade Minima"
@@ -139,8 +141,8 @@ export default function Product({ sectorList }: SectorProps) {
                             value={quantidadeMin}
                             onChange={(e) => setQuantidadeMin(e.target.value)}
                         />
-
-                        <textarea
+                        <h3>Descrição</h3>
+                        <input
                             placeholder="Descreva o seu produto..."
                             className={styles.input}
                             value={description}

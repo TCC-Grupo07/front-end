@@ -1,67 +1,68 @@
 .headerContainer {
-    height: 5rem;
+  height: 5rem;
 }
 
 .headerContent {
-    width: 100%;
-    height: 5rem;
-    margin: 0 auto;
-    padding: 0 2rem;
+  width: 100%;
+  height: 5rem;
+  margin: 0 auto;
+  padding: 0 2rem;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    img {
-        transition: transform 0.8s;
+  img {
+    transition: transform 0.8s;
 
-        &:hover {
+    &:hover {
 
-            transform: scale(1.1);
-        }
+      transform: scale(1.1);
     }
+  }
 
 }
 
 .menuNav {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
 
 
-    a {
-        color: #009C86;
-        text-decoration: none;
-        padding: 0 0.5rem;
-        display: inline-block;
-        position: relative;
-        transition: transform 0.8s;
-        font-weight: 500;
+  a {
+    color: #009C86;
+    text-decoration: none;
+    padding: 0 0.5rem;
+    display: inline-block;
+    position: relative;
+    transition: transform 0.8s;
+    font-weight: 500;
 
-        &+a {
-            margin-left: 2rem;
-        }
-
-        &:hover {
-            color: #51b2aa;
-            transform: scale(1.2);
-        }
+    &+a {
+      margin-left: 2rem;
     }
 
-
-
-
-    button {
-        color: #009C86;
-        margin-left: 2rem;
-        background: transparent;
-        border: 0;
-        transition: transform 0.8s;
-
-        &:hover {
-            transform: scale(1.2);
-            color: #51b2aa;
-        }
+    &:hover {
+      color: #51b2aa;
+      transform: scale(1.2);
     }
+  }
+
+
+
+
+  button {
+    color: #009C86;
+    margin-left: 2rem;
+    background: transparent;
+    border: 0;
+    transition: transform 0.8s;
+
+    &:hover {
+      transform: scale(1.2);
+      color: #51b2aa;
+    }
+  }
+
 
 }
