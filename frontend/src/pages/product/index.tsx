@@ -136,7 +136,7 @@ export default function Product({ sectorList }: SectorProps) {
                         <h3>Quantidade Mínima</h3>
                         <input
                             type="number"
-                            placeholder="Quantidade Minima"
+                            placeholder="Quantidade Mínima"
                             className={styles.input}
                             value={quantidadeMin}
                             onChange={(e) => setQuantidadeMin(e.target.value)}

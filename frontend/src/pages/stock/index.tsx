@@ -115,12 +115,12 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                 const apiClient = setupAPIClient();
                 await apiClient.put(`/product`, { product_id: id, name, price, quantidadeMin });
 
-                // Atualizar a lista de produtos após a edição
+
                 const updatedProducts = allProducts.map(product =>
                     product.id === id ? { ...product, name, price, quantidadeMin } : product
                 );
                 setAllProducts(updatedProducts);
-                setEditProductData(null); // Fechar o modal de edição
+                setEditProductData(null);
 
                 toast.success('PRODUTO ATUALIZADO COM SUCESSO');
             } catch (error) {
@@ -130,14 +130,14 @@ const Stock: React.FC<StockProps> = ({ products }) => {
         }
     };
 
-    // Função para fechar o modal ao clicar fora
+
     const handleOutsideClick = (event: MouseEvent) => {
         if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-            setEditProductData(null); // Fecha o modal
+            setEditProductData(null);
         }
     };
 
-    // Adiciona o evento de clique fora do modal
+
     useEffect(() => {
         document.addEventListener('mousedown', handleOutsideClick);
         return () => {
@@ -256,7 +256,7 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                                 placeholder="Preço"
                             />
                             <button onClick={handleUpdate}>Atualizar</button>
-                            <button className={styles.buttonFechar} onClick={() => setEditProductData(null)}>Fechar</button>
+                            <button className={styles.buttonFechar} onClick={() => setEditProductData(null)}>Cancelar</button>
                         </div>
                     )}
                 </main>

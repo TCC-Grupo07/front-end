@@ -3,7 +3,6 @@
     padding: 0 2rem;
     display: flex;
     justify-content: center;
-    /* Centraliza o conteúdo horizontalmente */
     flex-direction: column;
 
     select {
@@ -48,8 +47,8 @@
     .editButton {
         height: 45px;
         border-radius: 6px;
-        background-color: rgb(20, 129, 238);
-        border: solid 1px rgb(20, 129, 238);
+        background-color: rgb(156, 158, 161);
+        border: solid 1px rgb(156, 158, 161);
         color: #FFF;
         font-weight: bold;
         font-size: 20px;
@@ -67,8 +66,8 @@
         }
 
         &:hover {
-            background-color: rgb(81, 158, 235);
-            border: solid 1px rgb(81, 158, 235);
+            background-color: rgb(206, 209, 212);
+            border: solid 1px rgb(206, 209, 212);
             color: #FFF;
         }
 
@@ -180,34 +179,6 @@
         background-color: #51b2aa;
         border: solid 1px #51b2aa;
         color: #FFF;
-    }
-}
-
-.labelAvatar {
-    width: 100%;
-    height: 280px;
-    margin-bottom: 1rem;
-    border-radius: 0.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border: solid 1px black;
-
-    input {
-        display: none;
-    }
-
-    span {
-        z-index: 99;
-        position: absolute;
-        opacity: 0.7;
-        transition: all 0.5s;
-    }
-
-    span:hover {
-        opacity: 1;
-        transform: scale(1.2);
     }
 }
 
