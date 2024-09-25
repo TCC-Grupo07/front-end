@@ -8,6 +8,8 @@ import Link from 'next/link';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import { FaTrash } from "react-icons/fa";
+import { MdEdit } from "react-icons/md";
 
 let url = "https://3333-tccgrupo07-backend-nbleekv05qr.ws-us116.gitpod.io";
 
@@ -210,18 +212,17 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                                                     />
                                                 </td>
                                                 <td>
-                                                    <button
-                                                        className={styles.deleteButton}
-                                                        onClick={() => handleDelete(product.id, product.name)}
-                                                    >
-                                                        Deletar
-                                                    </button>
-                                                    <button
+
+                                                    <MdEdit
                                                         className={styles.editButton}
-                                                        onClick={() => handleEdit(product)}
-                                                    >
-                                                        Editar
-                                                    </button>
+                                                        color=' #1a77e1' size={25}
+                                                        onClick={() => handleEdit(product)} />
+
+                                                    <FaTrash
+                                                        className={styles.deleteButton}
+                                                        color='red' size={25}
+                                                        onClick={() => handleDelete(product.id, product.name)} />
+
                                                 </td>
                                             </tr>
                                         ))}
@@ -231,34 +232,38 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                         </div>
                     </div>
 
+
                     {editProductData && (
-                        <div className={styles.modal} ref={modalRef}>
-                            <h2>Editar Produto</h2>
-                            <h3>Nome</h3>
-                            <input
-                                type="text"
-                                value={editProductData.name}
-                                onChange={(e) => setEditProductData({ ...editProductData, name: e.target.value })}
-                                placeholder="Nome do Produto"
-                            />
-                            <h3>Quantidade Mínima</h3>
-                            <input
-                                type="number"
-                                value={editProductData.quantidadeMin}
-                                onChange={(e) => setEditProductData({ ...editProductData, quantidadeMin: e.target.value })}
-                                placeholder="Quantidade Mínima"
-                            />
-                            <h3>Preço</h3>
-                            <input
-                                type="text"
-                                value={editProductData.price}
-                                onChange={(e) => setEditProductData({ ...editProductData, price: e.target.value })}
-                                placeholder="Preço"
-                            />
-                            <button onClick={handleUpdate}>Atualizar</button>
-                            <button className={styles.buttonFechar} onClick={() => setEditProductData(null)}>Cancelar</button>
+                        <div className={styles.modalOverlay}>
+                            <div className={styles.modal} ref={modalRef}>
+                                <h2>Editar Produto</h2>
+                                <h3>Nome</h3>
+                                <input
+                                    type="text"
+                                    value={editProductData.name}
+                                    onChange={(e) => setEditProductData({ ...editProductData, name: e.target.value })}
+                                    placeholder="Nome do Produto"
+                                />
+                                <h3>Quantidade Mínima</h3>
+                                <input
+                                    type="number"
+                                    value={editProductData.quantidadeMin}
+                                    onChange={(e) => setEditProductData({ ...editProductData, quantidadeMin: e.target.value })}
+                                    placeholder="Quantidade Mínima"
+                                />
+                                <h3>Preço</h3>
+                                <input
+                                    type="text"
+                                    value={editProductData.price}
+                                    onChange={(e) => setEditProductData({ ...editProductData, price: e.target.value })}
+                                    placeholder="Preço"
+                                />
+                                <button onClick={handleUpdate}>Atualizar</button>
+                                <button className={styles.buttonFechar} onClick={() => setEditProductData(null)}>Cancelar</button>
+                            </div>
                         </div>
                     )}
+
                 </main>
             </div>
         </>
