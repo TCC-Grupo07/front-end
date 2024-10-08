@@ -11,23 +11,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #ffffff; // Cor de fundo do cabeçalho
 
   img {
     transition: transform 0.8s;
 
     &:hover {
-
       transform: scale(1.1);
     }
   }
-
 }
 
 .menuNav {
   display: flex;
   align-items: center;
-
-
 
   a {
     color: #009C86;
@@ -48,9 +45,6 @@
     }
   }
 
-
-
-
   button {
     color: #009C86;
     margin-left: 2rem;
@@ -59,10 +53,57 @@
     transition: transform 0.8s;
 
     &:hover {
-      transform: scale(1.2);
       color: #51b2aa;
     }
   }
+}
 
+.userMenu {
+  position: relative;
 
+  p {
+    margin-left: 2rem;
+  }
+
+  .user {
+    cursor: pointer;
+    font-weight: bold;
+
+    border-radius: 4px;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: white;
+    color: black;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 5px; // Espaçamento entre o nome do usuário e o dropdown
+    display: flex;
+    flex-direction: column; // Para alinhar os itens verticalmente
+    align-items: center; // Centraliza os itens horizontalmente
+    padding: 5px 0; // Espaçamento interno
+
+    button {
+      width: auto; // Tamanho automático
+      padding: 10px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      text-align: center; // Alinhamento centralizado
+      color: #d33;
+
+      &:hover {
+        color: #d33; // Cor ao passar o mouse
+      }
+    }
+  }
 }

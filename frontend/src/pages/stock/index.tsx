@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { canSSRAuth } from '../../utils/canSSRAuth';
 import { Header } from '../../components/Header';
 import { setupAPIClient } from '../../services/api';
@@ -11,7 +11,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import { FaTrash } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 
-let url = "https://3333-tccgrupo07-backend-oly2zcnd8gx.ws-us116.gitpod.io";
+let url = "https://3333-tccgrupo07-backend-hwn9eiymrdk.ws-us116.gitpod.io";
 
 interface Product {
     id: string;
@@ -22,7 +22,7 @@ interface Product {
     quantidadeMin: string;
     sector: {
         id: string;
-        name: string;  // Nome do setor
+        name: string;
     };
 }
 
@@ -33,33 +33,29 @@ interface StockProps {
 const Stock: React.FC<StockProps> = ({ products }) => {
     const [selectedSector, setSelectedSector] = useState<string>('Todos');
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-    const [allProducts, setAllProducts] = useState<Product[]>(products);
-    const [editProductData, setEditProductData] = useState<Product | null>(null); // Novo estado para edição
-    const modalRef = useRef<HTMLDivElement | null>(null); // Referência para o modal
+    const [editProductData, setEditProductData] = useState<Product | null>(null);
+    const modalRef = useRef<HTMLDivElement | null>(null);
 
-    // Agrupar produtos por nome do setor
-    const groupedProducts = allProducts.reduce((acc: { [key: string]: Product[] }, product) => {
-        const sectorName = product.sector?.name || "Desconhecido"; // Usar o nome do setor, com fallback para "Desconhecido"
-        (acc[sectorName] = acc[sectorName] || []).push(product);
-        return acc;
-    }, {});
+    // Agrupar produtos por nome do setor com useMemo
+    const groupedProducts = useMemo(() => {
+        return products.reduce((acc: { [key: string]: Product[] }, product) => {
+            const sectorName = product.sector?.name || "Desconhecido";
+            (acc[sectorName] = acc[sectorName] || []).push(product);
+            return acc;
+        }, {});
+    }, [products]);
 
-    // Obter lista de setores únicos e ordenar em ordem alfabética
     const sectors = ['Todos', ...Object.keys(groupedProducts).sort((a, b) => a.localeCompare(b))];
 
     useEffect(() => {
-        // Filtrar e ordenar produtos com base no setor selecionado
-        let productsToDisplay = selectedSector === 'Todos'
-            ? allProducts
+        const productsToDisplay = selectedSector === 'Todos'
+            ? products
             : groupedProducts[selectedSector] || [];
 
-        // Ordenar produtos por nome em ordem alfabética
         productsToDisplay.sort((a, b) => a.name.localeCompare(b.name));
-
         setFilteredProducts(productsToDisplay);
-    }, [selectedSector, allProducts, groupedProducts]);
+    }, [selectedSector, groupedProducts, products]);
 
-    // Função para deletar produto com SweetAlert2
     const handleDelete = async (product_id: string, product_name: string) => {
         const result = await Swal.fire({
             title: `Você tem certeza?`,
@@ -77,10 +73,7 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                 const apiClient = setupAPIClient();
                 await apiClient.delete(`/product`, { params: { product_id } });
 
-                // Atualizar a lista de produtos após deletar
-                const updatedProducts = allProducts.filter(product => product.id !== product_id);
-                setAllProducts(updatedProducts);
-
+                setFilteredProducts(prev => prev.filter(product => product.id !== product_id));
                 toast.success('PRODUTO REMOVIDO COM SUCESSO');
             } catch (error) {
                 toast.error('ERRO AO REMOVER O PRODUTO');
@@ -89,16 +82,13 @@ const Stock: React.FC<StockProps> = ({ products }) => {
         }
     };
 
-    // Função para abrir o modal de edição
     const handleEdit = (product: Product) => {
         setEditProductData(product);
     };
 
-    // Função para atualizar o produto com confirmação
     const handleUpdate = async () => {
         if (!editProductData) return;
 
-        // Confirmação antes de atualizar o produto
         const result = await Swal.fire({
             title: 'Confirmar Atualização',
             text: `Você deseja realmente atualizar o produto para "${editProductData.name}"?`,
@@ -117,13 +107,12 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                 const apiClient = setupAPIClient();
                 await apiClient.put(`/product`, { product_id: id, name, price, quantidadeMin });
 
-
-                const updatedProducts = allProducts.map(product =>
-                    product.id === id ? { ...product, name, price, quantidadeMin } : product
+                setFilteredProducts(prev =>
+                    prev.map(product =>
+                        product.id === id ? { ...product, name, price, quantidadeMin } : product
+                    )
                 );
-                setAllProducts(updatedProducts);
                 setEditProductData(null);
-
                 toast.success('PRODUTO ATUALIZADO COM SUCESSO');
             } catch (error) {
                 toast.error('ERRO AO ATUALIZAR O PRODUTO');
@@ -132,13 +121,11 @@ const Stock: React.FC<StockProps> = ({ products }) => {
         }
     };
 
-
     const handleOutsideClick = (event: MouseEvent) => {
         if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
             setEditProductData(null);
         }
     };
-
 
     useEffect(() => {
         document.addEventListener('mousedown', handleOutsideClick);
@@ -212,17 +199,14 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                                                     />
                                                 </td>
                                                 <td>
-
                                                     <MdEdit
                                                         className={styles.editButton}
                                                         color=' #1a77e1' size={25}
                                                         onClick={() => handleEdit(product)} />
-
                                                     <FaTrash
                                                         className={styles.deleteButton}
                                                         color='red' size={25}
                                                         onClick={() => handleDelete(product.id, product.name)} />
-
                                                 </td>
                                             </tr>
                                         ))}
@@ -231,7 +215,6 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                             )}
                         </div>
                     </div>
-
 
                     {editProductData && (
                         <div className={styles.modalOverlay}>
@@ -263,7 +246,6 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                             </div>
                         </div>
                     )}
-
                 </main>
             </div>
         </>
