@@ -1,0 +1,28 @@
+.chartContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o gráfico */
+    margin: 2rem 0; /* Margens em volta do gráfico */
+    padding: 1rem;
+    border: 1px solid #ddd; /* Borda para o contêiner do gráfico */
+    border-radius: 8px; /* Cantos arredondados */
+    background-color: #f9f9f9; /* Cor de fundo clara */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+
+    h2 {
+        margin-bottom: 1rem; /* Espaço abaixo do título */
+        color: #333; /* Cor do texto do título */
+    }
+
+    .recharts-cartesian-axis {
+        font-size: 0.9rem; /* Tamanho da fonte dos eixos */
+        color: #666; /* Cor do texto dos eixos */
+    }
+
+    .recharts-tooltip {
+        background: rgba(255, 255, 255, 0.9); /* Fundo da tooltip */
+        border: 1px solid #ccc; /* Borda da tooltip */
+        border-radius: 4px; /* Cantos arredondados da tooltip */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra da tooltip */
+    }
+}
