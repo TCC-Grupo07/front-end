@@ -11,7 +11,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import { FaTrash } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 
-let url = "https://3333-tccgrupo07-backend-hwn9eiymrdk.ws-us116.gitpod.io";
+let url = "https://3333-tccgrupo07-backend-z18yqlc3xuc.ws-us116.gitpod.io";
 
 interface Product {
     id: string;
@@ -191,11 +191,13 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                                                 <td>{product.quantidadeMin}</td>
                                                 <td>{product.quantidade}</td>
                                                 <td>R$ {product.price}</td>
-                                                <td>
+                                                <td className={styles.imagem}>
                                                     <img
                                                         src={`${url}/files/${product.banner}`}
                                                         alt={product.name}
                                                         className={styles.bannerImage}
+                                                        width={100}
+                                                        height={100}
                                                     />
                                                 </td>
                                                 <td>

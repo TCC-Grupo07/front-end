@@ -190,12 +190,19 @@
 }
 
 .bannerImage {
-    width: 100px;
-    height: auto;
+
+    width: auto;
+    max-width: 100px;
+    max-height: 100px;
+
     border-radius: 8px;
     transition: 0.9s;
 
 
+}
+
+.imagem {
+    max-height: 10px;
 }
 
 .filtrar {

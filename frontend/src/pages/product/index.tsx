@@ -101,8 +101,8 @@ export default function Product({ sectorList }: SectorProps) {
                                     className={styles.preview}
                                     src={avatarUrl}
                                     alt="Foto do produto"
-                                    width={250}
-                                    height={250}
+                                    width={"auto"}
+                                    // height={250}
                                 />
                             )}
                         </label>
