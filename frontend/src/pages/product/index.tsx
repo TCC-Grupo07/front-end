@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { ChangeEvent, useState, FormEvent } from 'react'
-import styles from "./styles.module.scss"
+import styles from './styles.module.scss'
 import { canSSRAuth } from '../../utils/canSSRAuth'
 import { Header } from '../../components/Header'
 import { FiUpload } from 'react-icons/fi'
@@ -8,169 +8,186 @@ import { setupAPIClient } from '../../services/api'
 import { toast } from 'react-toastify'
 
 type ItemProps = {
-    id: string
-    name: string
+  id: string
+  name: string
 }
 
 interface SectorProps {
-    sectorList: ItemProps[];
+  sectorList: ItemProps[]
 }
 
 export default function Product({ sectorList }: SectorProps) {
+  const [avatarUrl, setAvatarUrl] = useState('')
+  const [imageAvatar, setImageAvatar] = useState<File | null>(null)
+  const [sectors, setSectors] = useState(sectorList || [])
+  const [sectorSelected, setSectorSelected] = useState(0)
+  const [name, setName] = useState('')
+  const [price, setPrice] = useState('')
+  const [description, setDescription] = useState('')
+  const [quantidadeMin, setQuantidadeMin] = useState('')
 
-    const [avatarUrl, setAvatarUrl] = useState('')
-    const [imageAvatar, setImageAvatar] = useState(null)
-    const [sectors, setSectors] = useState(sectorList || [])
-    const [sectorSelected, setSectorSelected] = useState(0)
-    const [name, setName] = useState('')
-    const [price, setPrice] = useState('')
-    const [description, setDescription] = useState('')
-    const [quantidadeMin, setQuantidadeMin] = useState('')
+  function handleFile(e: ChangeEvent<HTMLInputElement>) {
+    if (!e.target.files) return
 
-    function handleFile(e: ChangeEvent<HTMLInputElement>) {
-        if (!e.target.files) return
+    const image = e.target.files[0]
+    if (!image) return
 
-        const image = e.target.files[0]
-        if (!image) return
-
-        if (image.type === 'image/jpeg' || image.type === 'image/png') {
-            setImageAvatar(image)
-            setAvatarUrl(URL.createObjectURL(e.target.files[0]))
-        }
+    if (image.type !== 'image/jpeg' && image.type !== 'image/png') {
+      toast.error('A imagem deve ser JPEG ou PNG!')
+      return
     }
 
-    function handleChangeSector(event) {
-        setSectorSelected(event.target.value)
+    if (image.size > 5 * 1024 * 1024) {
+      toast.error('A imagem não pode ser maior que 5MB!')
+      return
     }
 
-    async function handleRegister(event: FormEvent) {
-        event.preventDefault()
+    setImageAvatar(image)
+    setAvatarUrl(URL.createObjectURL(image))
+  }
 
-        try {
-            const data = new FormData()
+  function handleChangeSector(event: ChangeEvent<HTMLSelectElement>) {
+    setSectorSelected(Number(event.target.value))
+  }
 
-            if (name === '' || price === '' || description === '' || imageAvatar === null || quantidadeMin === '') {
-                toast.warning("PREENCHA TODOS OS CAMPOS")
-                return
-            }
+  async function handleRegister(event: FormEvent) {
+    event.preventDefault()
 
-            data.append('name', name)
-            data.append('price', price)
-            data.append('description', description)
-            data.append('sector_id', sectors[sectorSelected].id)
-            data.append('file', imageAvatar)
-            data.append('quantidadeMin', quantidadeMin)
-
-            const apiClient = setupAPIClient()
-            await apiClient.post('/product', data)
-
-            toast.success("CADASTRADO COM SUCESSO!")
-
-        } catch (err) {
-            toast.error("Ops... ERRO AO CADASTRAR")
-        }
-
-        setName('')
-        setPrice('')
-        setDescription('')
-        setAvatarUrl('')
-        setQuantidadeMin('')
-        setImageAvatar(null)
+    if (!name || !price || !description || !quantidadeMin || !imageAvatar) {
+      toast.warning('PREENCHA TODOS OS CAMPOS')
+      return
     }
 
-    return (
-        <>
-            <Head>
-                <title>Novo Produto - StockPro</title>
-            </Head>
-            <div>
-                <Header />
-                <main className={styles.container}>
-                    <h1>Novo Produto</h1>
+    try {
+      const data = new FormData()
 
-                    <form className={styles.form} onSubmit={handleRegister}>
+      data.append('name', name)
+      data.append('price', price)
+      data.append('description', description)
+      data.append('sector_id', sectors[sectorSelected].id)
+      data.append('file', imageAvatar)
+      data.append('quantidadeMin', quantidadeMin)
 
-                        <h3>Foto</h3>
-                        <label className={styles.labelAvatar}>
-                            <span>
-                                <FiUpload size={30} color='#000' />
-                            </span>
-                            <input type="file" accept="image/png, image/jpg" onChange={handleFile} />
-                            {avatarUrl && (
-                                <img
-                                    className={styles.preview}
-                                    src={avatarUrl}
-                                    alt="Foto do produto"
-                                    width={"auto"}
-                                    // height={250}
-                                />
-                            )}
-                        </label>
+      const apiClient = setupAPIClient()
+      await apiClient.post('/product', data)
 
-                        <h3>Setor</h3>
-                        <select value={sectorSelected} onChange={handleChangeSector}>
-                            {sectors.map((item, index) => {
-                                return (
-                                    <option key={item.id} value={index}>
-                                        {item.name}
-                                    </option>
-                                )
-                            })}
-                        </select>
-                        <h3>Nome</h3>
-                        <input
-                            type="text"
-                            placeholder="Digite o nome do produto"
-                            className={styles.input}
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        />
-                        <h3>Preço</h3>
-                        <input
-                            type="number"
-                            placeholder="Preço do produto"
-                            className={styles.input}
-                            value={price}
-                            onChange={(e) => setPrice(e.target.value)}
-                        />
-                        <h3>Quantidade Mínima</h3>
-                        <input
-                            type="number"
-                            placeholder="Quantidade Mínima"
-                            className={styles.input}
-                            value={quantidadeMin}
-                            onChange={(e) => setQuantidadeMin(e.target.value)}
-                        />
-                        <h3>Descrição</h3>
-                        <input
-                            placeholder="Descreva o seu produto..."
-                            className={styles.input}
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                        />
+      toast.success('Produto cadastrado com sucesso!')
+      
+      setName('')
+      setPrice('')
+      setDescription('')
+      setAvatarUrl('')
+      setQuantidadeMin('')
+      setImageAvatar(null)
+    } catch (err) {
+      toast.error('Erro ao cadastrar o produto!')
+    }
+  }
 
-                        <button className={styles.buttonAdd} type='submit'>
-                            Cadastrar
-                        </button>
+  return (
+    <>
+      <Head>
+        <title>Novo Produto - StockPro</title>
+      </Head>
+      <div>
+        <Header />
+        <main className={styles.container}>
+          <h1>Novo Produto</h1>
 
-                    </form>
-                </main>
-            </div>
-        </>
-    )
+          <form className={styles.form} onSubmit={handleRegister}>
+            <h3>Foto</h3>
+            <label className={styles.labelAvatar}>
+              <span>
+                <FiUpload size={30} color="#000" />
+              </span>
+              <input type="file" accept="image/png, image/jpg" onChange={handleFile} />
+              {avatarUrl && (
+                <img
+                  className={styles.preview}
+                  src={avatarUrl}
+                  alt="Foto do produto"
+                  width="auto"
+                />
+              )}
+            </label>
+
+            <h3>Setor</h3>
+            <select value={sectorSelected} onChange={handleChangeSector}>
+              {sectors.map((item, index) => (
+                <option key={item.id} value={index}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+
+            <h3>Nome</h3>
+            <input
+              type="text"
+              placeholder="Digite o nome do produto"
+              className={styles.input}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+
+            <h3>Preço</h3>
+            <input
+              type="number"
+              placeholder="Preço do produto"
+              className={styles.input}
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+
+            <h3>Quantidade Mínima</h3>
+            <input
+              type="number"
+              placeholder="Quantidade Mínima"
+              className={styles.input}
+              value={quantidadeMin}
+              onChange={(e) => setQuantidadeMin(e.target.value)}
+            />
+
+            <h3>Descrição</h3>
+            <input
+              placeholder="Descreva o seu produto..."
+              className={styles.input}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+
+            <button className={styles.buttonAdd} type="submit">
+              Cadastrar
+            </button>
+          </form>
+        </main>
+      </div>
+    </>
+  )
 }
 
+// Função getServerSideProps corrigida
 export const getServerSideProps = canSSRAuth(async (ctx) => {
-    const apiClient = setupAPIClient(ctx)
+  const apiClient = setupAPIClient(ctx)
+
+  try {
     const response = await apiClient.get('/sector')
 
     const sectorList = response.data.sort((a: ItemProps, b: ItemProps) => {
-        return a.name.localeCompare(b.name);
-    });
+      return a.name.localeCompare(b.name)
+    })
 
+    // Certifique-se de retornar um objeto com 'props' para o Next.js
     return {
-        props: {
-            sectorList
-        }
+      props: {
+        sectorList,
+      },
     }
+  } catch (err) {
+    // Caso a API falhe, retornamos um objeto vazio
+    return {
+      props: {
+        sectorList: [],
+      },
+    }
+  }
 })

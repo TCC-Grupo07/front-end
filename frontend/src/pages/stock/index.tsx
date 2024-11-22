@@ -11,7 +11,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import { FaTrash } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 
-let url = "https://3333-tccgrupo07-backend-z18yqlc3xuc.ws-us116.gitpod.io";
+let url = "https://3333-tccgrupo07-backend-x21fabe3q66.ws-us116.gitpod.io";
 
 interface Product {
     id: string;
