@@ -1,4 +1,13 @@
 [build]
-  base = "frontend"  # Caso o código esteja na pasta 'frontend'
-  command = "npm install && npm run build"  # Instala dependências e depois faz o build
-  publish = "frontend/.next"  # Diretório de build gerado pelo Next.js
+  # Define o diretório onde o código está localizado, neste caso, a pasta 'frontend'
+  base = "frontend"
+
+  # Comando para instalar as dependências e rodar o build
+  command = "npm run deploy"  # Este comando chama o script 'deploy' no package.json
+
+  # Diretório onde o Next.js gera os arquivos de build
+  publish = "frontend/.next"
+  
+  # (Opcional) Variáveis de ambiente, se necessário
+  # [build.environment]
+  #   NODE_ENV = "production"
