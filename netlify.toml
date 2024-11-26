@@ -1,4 +1,4 @@
 [build]
   base = "frontend"  # Caso o código esteja na pasta 'frontend'
-  command = "npm run build"  # Comando de build
+  command = "npm install && npm run build"  # Instala dependências e depois faz o build
   publish = "frontend/.next"  # Diretório de build gerado pelo Next.js
