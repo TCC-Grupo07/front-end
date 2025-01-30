@@ -1,0 +1,358 @@
+/* Contêiner geral */
+.container {
+    padding: 20px;
+
+    .row1 {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+}
+
+/* Estilos de pesquisa */
+.searchContainer {
+    margin-bottom: 20px;
+}
+
+
+
+.searchInput {
+    width: 100%;
+    height: 40px;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    color: var(--white);
+    border: 1px solid black;
+    padding: 0 0.5rem;
+
+}
+
+/* Tabela de produtos */
+.tableContainer {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.productTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+
+.productTable th,
+.productTable td {
+    padding: 10px;
+    text-align: left;
+
+    border: 1px solid #ddd;
+}
+
+.productTable th {
+    background-color: #f4f4f4;
+}
+
+/* Efeito de hover na tabela */
+.productTable tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+/* Estilo do botão da tabela */
+.productTable button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.productTable button:hover {
+    background-color: #45a049;
+}
+
+/* Estilos da imagem do banner */
+.bannerImage {
+    width: auto;
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 8px;
+}
+
+/* Estilo para mensagens de erro ou estoque esgotado */
+.productTable td[style*="background-color: #f8d7da"] {
+    color: #721c24;
+    font-weight: bold;
+}
+
+/* Estilos do carrinho de compras */
+.cart {
+    margin-top: 20px;
+}
+
+.cart ul {
+    list-style: none;
+    padding: 0;
+}
+
+.cartItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.cartItem input {
+    width: 50px;
+}
+
+.cartTotal {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Botão de finalização da compra */
+.checkoutButton {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.checkoutButton:hover {
+    background-color: #45a049;
+}
+
+/* Estilos para desabilitar cliques de produtos fora de estoque */
+.productTable td[style*="background-color: #f8d7da"] {
+    background-color: #f8d7da;
+    /* Fundo vermelho claro */
+    cursor: not-allowed;
+    /* Desabilita o clique */
+}
+
+/* Estilos adicionais para garantir a responsividade e clareza */
+.productTable td img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.productTable td span {
+    font-size: 12px;
+    color: red;
+}
+
+
+
+
+
+
+
+
+/* Estilos para o Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+    position: relative;
+}
+
+.closeButton {
+    color: red;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Estilo para o botão de carrinho */
+.cartButton {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    // margin-top: 20px;
+}
+
+.cartButton:hover {
+    background-color: #45a049;
+}
+
+/* Estilo para a Tabela do Carrinho */
+.cartTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.cartTable th,
+.cartTable td {
+    padding: 10px;
+    // text-align: left;
+    // text-align: center;
+
+    border: 1px solid #ddd;
+}
+
+.cartTable th {
+    text-align: center;
+}
+
+
+.tdAcao {
+    text-align: center;
+}
+
+.cartTable th {
+    background-color: #f4f4f4;
+}
+
+.cartTable tr:hover {
+    background-color: #f0f0f0;
+}
+
+.cartTable input {
+    width: 50px;
+}
+
+/* Estilo do Total do Carrinho */
+.cartTotal {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* Estilo do Botão de Finalizar Compra */
+.checkoutButton {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.checkoutButton:hover {
+    background-color: #45a049;
+}
+
+.quantidade {
+    border: solid 1px #000;
+    border-radius: 4px;
+    padding: 2px;
+}
+
+.remove {
+    color: white;
+    background-color: red;
+    border-radius: 4px;
+    border: none;
+    padding: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.table-container {
+    display: flex;
+    justify-content: center;
+    /* Centraliza a tabela */
+    margin-top: 20px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-top: 20px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin-bottom: 100px;
+    text-align: center;
+}
+
+.table th,
+.table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.table th {
+    background-color: #009C86;
+    color: #ffffff;
+}
+
+.table td {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.table .bannerImage {
+    // width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.addToCartButton {
+    // background-color: #009C86;
+    color: #009C86;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: transparent;
+
+}
+
+.table .addToCartButton:hover {
+    transform: scale(1.2);
+}

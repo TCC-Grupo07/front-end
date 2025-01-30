@@ -1,23 +1,18 @@
 .container {
     max-width: 720px;
     margin: 4rem auto;
-    padding: 0 2 rem;
+    padding: 0 2rem;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
 
-
-
     h1 {
         font-weight: 500;
-
     }
 
     h3 {
         margin-top: 20px;
     }
-
-
 }
 
 /* Estilos do modal */
@@ -52,7 +47,6 @@
     padding: 8px 8px;
     display: flex;
     justify-content: center;
-
     background-color: #D33;
     color: white;
     border: none;
@@ -78,12 +72,6 @@
     border: 1px solid #ddd;
     padding: 12px;
     text-align: left;
-}
-
-.acao {
-    border: 1px solid #ddd;
-    padding: 12px;
-    justify-content: center;
 }
 
 .table th {
@@ -121,8 +109,7 @@
     }
 }
 
-
-
+/* Estilo dos inputs */
 .input {
     display: flex;
     flex-direction: column;
@@ -132,51 +119,13 @@
     border-radius: 6px;
     width: 85%;
     padding: 8px;
-    // font-weight: bold;
-    // margin-top: 20px;
 }
 
 .input::placeholder {
     font-weight: 300;
 }
 
-@media (max-width: 767px) {
-
-    .input {
-        height: 45px;
-        border: solid 2px;
-        border-radius: 6px;
-        width: 300px;
-        padding: 20px;
-        // font-weight: bold;
-
-    }
-}
-
-.buttonSetores {
-    height: 45px;
-    border-radius: 6px;
-    background: none;
-    border: none;
-    color: #009C86;
-    text-decoration: underline;
-    font-weight: bold;
-    font-size: 20px;
-    width: 85%;
-    margin-top: 20px;
-    letter-spacing: -0.33px;
-    transition: 1s;
-
-    &[disabled] {
-        cursor: not-allowed;
-
-        svg {
-            animation: animate 2s infinite;
-        }
-    }
-
-}
-
+/* Estilo do botão */
 .button {
     height: 45px;
     border-radius: 6px;
@@ -203,55 +152,44 @@
         border: solid 1px #51b2aa;
         color: #FFF;
     }
-
 }
 
-.buttonText {
-    color: var(--white);
-}
-
-@keyframes animate {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
+/* Responsividade para inputs e botões em dispositivos móveis */
 @media (max-width: 767px) {
 
+    .input,
     .button {
+        width: 100%;
+        /* Ajusta para 100% da largura */
+        margin-top: 10px;
+    }
+
+    .button {
+        width: 100%;
         height: 45px;
-        flex-shrink: 0;
-        border-radius: 6px;
-        background-color: #009C86;
-        border: solid 1px #009C86;
-        color: #FFF;
-        font-weight: bold;
-        font-feature-settings: 'clig' off, 'liga' off;
-        font-size: 20px;
-        width: 300px;
-        margin-top: 20px;
-        letter-spacing: -0.33px;
-        transition: 3s;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 20px;
+    }
+
+    .buttonSetores {
+        width: 100%;
+        /* Garantindo que o botão de "Ver Setores" ocupe 100% */
+        height: 45px;
+        margin-top: 10px;
     }
 }
 
+/* Fechar o botão do modal */
 .closeButton {
     margin-left: 95%;
 }
 
+/* Coluna de Ações */
 .actionsColumn {
     text-align: center;
-    vertical-align: middle; // Centraliza verticalmente o conteúdo
+    vertical-align: middle;
+    /* Centraliza verticalmente o conteúdo */
 }
 
+/* Botão de deletar */
 .deleteButton {
     padding: 8px 16px;
     background-color: #d33;
@@ -259,4 +197,9 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 14px;
+}
+
+.deleteButton:hover {
+    background-color: #c22;
 }

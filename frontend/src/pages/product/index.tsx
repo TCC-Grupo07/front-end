@@ -21,10 +21,12 @@ export default function Product({ sectorList }: SectorProps) {
   const [imageAvatar, setImageAvatar] = useState<File | null>(null)
   const [sectors, setSectors] = useState(sectorList || [])
   const [sectorSelected, setSectorSelected] = useState(0)
+  const [codigo, setCodigo] = useState("")
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
   const [description, setDescription] = useState('')
   const [quantidadeMin, setQuantidadeMin] = useState('')
+
 
   function handleFile(e: ChangeEvent<HTMLInputElement>) {
     if (!e.target.files) return
@@ -53,7 +55,7 @@ export default function Product({ sectorList }: SectorProps) {
   async function handleRegister(event: FormEvent) {
     event.preventDefault()
 
-    if (!name || !price || !description || !quantidadeMin || !imageAvatar) {
+    if (!name || !price || !quantidadeMin || !imageAvatar) {
       toast.warning('PREENCHA TODOS OS CAMPOS')
       return
     }
@@ -61,6 +63,7 @@ export default function Product({ sectorList }: SectorProps) {
     try {
       const data = new FormData()
 
+      data.append('codigo', codigo)
       data.append('name', name)
       data.append('price', price)
       data.append('description', description)
@@ -72,7 +75,8 @@ export default function Product({ sectorList }: SectorProps) {
       await apiClient.post('/product', data)
 
       toast.success('Produto cadastrado com sucesso!')
-      
+
+      setCodigo('')
       setName('')
       setPrice('')
       setDescription('')
@@ -95,6 +99,35 @@ export default function Product({ sectorList }: SectorProps) {
           <h1>Novo Produto</h1>
 
           <form className={styles.form} onSubmit={handleRegister}>
+
+            <h3>Código</h3>
+            <input
+              type="text"
+              placeholder="Digite o código do produto"
+              className={styles.input}
+              value={codigo}
+              onChange={(e) => setCodigo(e.target.value)}
+            />
+
+            <h3>Nome</h3>
+            <input
+              type="text"
+              placeholder="Digite o nome do produto"
+              className={styles.input}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+
+
+            <h3>Setor</h3>
+            <select value={sectorSelected} onChange={handleChangeSector}>
+              {sectors.map((item, index) => (
+                <option key={item.id} value={index}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+
             <h3>Foto</h3>
             <label className={styles.labelAvatar}>
               <span>
@@ -110,24 +143,6 @@ export default function Product({ sectorList }: SectorProps) {
                 />
               )}
             </label>
-
-            <h3>Setor</h3>
-            <select value={sectorSelected} onChange={handleChangeSector}>
-              {sectors.map((item, index) => (
-                <option key={item.id} value={index}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-
-            <h3>Nome</h3>
-            <input
-              type="text"
-              placeholder="Digite o nome do produto"
-              className={styles.input}
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
 
             <h3>Preço</h3>
             <input
@@ -147,13 +162,13 @@ export default function Product({ sectorList }: SectorProps) {
               onChange={(e) => setQuantidadeMin(e.target.value)}
             />
 
-            <h3>Descrição</h3>
+            {/* <h3>Descrição</h3>
             <input
               placeholder="Descreva o seu produto..."
               className={styles.input}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-            />
+            /> */}
 
             <button className={styles.buttonAdd} type="submit">
               Cadastrar

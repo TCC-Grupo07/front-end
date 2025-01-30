@@ -33,6 +33,31 @@
 
     }
 
+    .buscar {
+        // margin-top: 10px;
+        // padding: 8px;
+        // border: 1px solid #ccc;
+        // border-radius: 4px;
+        // width: 100%;
+        // // max-width: 300px;
+        // font-size: 14px;
+
+
+        width: 100%;
+        height: 40px;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+        color: var(--white);
+        border: 1px solid black;
+        padding: 0 0.5rem;
+
+    }
+
+
+    .cursor {
+        cursor: pointer;
+    }
+
     .editButton {
         margin-right: 20px;
         cursor: pointer;
@@ -136,8 +161,11 @@
     /* Alinhamento dos botões à direita */
 }
 
+
+
 .buttonEntry,
-.buttonExit {
+.buttonExit,
+.buttonPDF {
     width: 168px;
     height: 45px;
     border-radius: 6px;
@@ -339,3 +367,435 @@
     width: 400px;
     max-width: 100%;
 }
+
+
+
+// .container {
+//     width: 100%;
+//     padding: 0 2rem;
+//     display: flex;
+//     justify-content: center;
+//     flex-direction: column;
+
+//     select {
+//         width: 100%;
+//         height: 40px;
+//         border-radius: 0.5rem;
+//         margin-bottom: 1rem;
+//         color: var(--white);
+//         border: 1px solid black;
+//         padding: 0 0.5rem;
+//     }
+
+//     .deleteButton {
+//         cursor: pointer;
+//         transition: 1s;
+
+//         &[disabled] {
+//             cursor: not-allowed;
+
+//             svg {
+//                 animation: animate 2s infinite;
+//             }
+//         }
+
+//         &:hover {
+//             transform: scale(1.2);
+//         }
+
+//     }
+
+//     .buscar {
+//         width: 100%;
+//         height: 40px;
+//         border-radius: 0.5rem;
+//         margin-bottom: 1rem;
+//         color: var(--white);
+//         border: 1px solid black;
+//         padding: 0 0.5rem;
+//     }
+
+//     .cursor {
+//         cursor: pointer;
+//     }
+
+//     .editButton {
+//         margin-right: 20px;
+//         cursor: pointer;
+//         transition: 1s;
+
+//         &[disabled] {
+//             cursor: not-allowed;
+
+//             svg {
+//                 animation: animate 2s infinite;
+//             }
+//         }
+
+//         &:hover {
+//             transform: scale(1.2);
+//         }
+
+//     }
+
+//     .buttonText {
+//         color: var(--white);
+//     }
+
+//     @keyframes animate {
+//         from {
+//             transform: rotate(0deg);
+//         }
+
+//         to {
+//             transform: rotate(360deg);
+//         }
+//     }
+
+//     @media (max-width: 767px) {
+//         .container {
+//             padding: 0 1rem;
+//             /* Reduz o padding lateral em telas pequenas */
+//         }
+
+//         .button {
+//             height: 45px;
+//             flex-shrink: 0;
+//             border-radius: 6px;
+//             background-color: #009C86;
+//             border: solid 1px #009C86;
+//             color: #FFF;
+//             font-weight: bold;
+//             font-feature-settings: 'clig' off, 'liga' off;
+//             font-size: 20px;
+//             width: 100%;
+//             margin-top: 20px;
+//             letter-spacing: -0.33px;
+//             transition: 3s;
+//             display: flex;
+//             justify-content: center;
+//             align-items: center;
+//             margin-bottom: 20px;
+//         }
+
+//         .table-container {
+//             display: flex;
+//             justify-content: center;
+//             overflow-x: auto;
+//             /* Permite rolagem horizontal */
+//         }
+
+//         .table {
+//             width: 100%;
+//             border-collapse: separate;
+//             border-spacing: 0;
+//             margin-top: 20px;
+//             border-radius: 0.5rem;
+//             text-align: center;
+//             min-width: 800px;
+//             /* Garante que a tabela tenha largura mínima */
+//         }
+
+//         .table th,
+//         .table td {
+//             border: 1px solid #ddd;
+//             padding: 8px;
+//             word-wrap: break-word;
+//             /* Quebra palavras grandes que não cabem */
+//         }
+
+//         .buttonEntry,
+//         .buttonExit,
+//         .buttonPDF {
+//             width: 100%;
+//             max-width: 300px;
+//             /* Limita o tamanho máximo dos botões */
+//             height: 45px;
+//             border-radius: 6px;
+//             background-color: #009C86;
+//             border: solid 1px #009C86;
+//             color: #FFF;
+//             font-size: 20px;
+//             margin-top: 20px;
+//             letter-spacing: -0.33px;
+//             transition: 1s;
+//             display: flex;
+//             justify-content: center;
+//             align-items: center;
+//             text-decoration: none;
+//             margin-left: 0;
+//         }
+
+//         .buttons {
+//             display: flex;
+//             flex-direction: column;
+//             /* Alinha os botões verticalmente em telas menores */
+//             align-items: center;
+//             justify-content: flex-start;
+//             gap: 10px;
+//             /* Espaço entre os botões */
+//             margin-bottom: 20px;
+//         }
+
+//         h1 {
+//             font-weight: 500;
+//             font-size: 1.5rem;
+//             text-align: center;
+//             /* Centraliza o título em telas menores */
+//         }
+
+//         .bannerImage {
+//             width: 80px;
+//             /* Ajusta o tamanho da imagem do banner para telas pequenas */
+//             height: 80px;
+//         }
+
+//         .input,
+//         .buscar,
+//         select {
+//             width: 100%;
+//             /* Faz com que os inputs ocupem toda a largura */
+//             box-sizing: border-box;
+//         }
+
+//         input,
+//         select {
+//             height: 40px;
+//             padding: 0 10px;
+//         }
+//     }
+// }
+
+// .container h1 {
+//     font-weight: 500;
+//     display: flex;
+//     margin-right: 70%;
+// }
+
+// .form {
+//     display: flex;
+//     flex-direction: column;
+//     margin: 1rem 0;
+
+//     textarea {
+//         width: 100%;
+//         min-height: 100px;
+//         resize: none;
+//         padding: 0.5rem;
+//     }
+
+//     select {
+//         width: 100%;
+//         height: 40px;
+//         border-radius: 0.5rem;
+//         margin-bottom: 1rem;
+//         color: var(--white);
+//         border: 1px solid black;
+//         padding: 0 0.5rem;
+//     }
+// }
+
+// .input {
+//     border-radius: 0.5rem;
+//     margin-bottom: 1rem;
+//     color: black;
+//     border: 1px solid black;
+//     height: 40px;
+//     padding: 0 0.5rem;
+// }
+
+// .buttons {
+//     display: flex;
+//     flex-direction: row;
+//     align-items: flex-end;
+//     justify-content: flex-end;
+//     gap: 10px;
+//     /* Espaçamento entre os botões */
+// }
+
+// .buttonEntry,
+// .buttonExit,
+// .buttonPDF {
+//     width: 168px;
+//     height: 45px;
+//     border-radius: 6px;
+//     background-color: #009C86;
+//     border: solid 1px #009C86;
+//     color: #FFF;
+//     font-size: 20px;
+//     margin-top: 20px;
+//     letter-spacing: -0.33px;
+//     transition: 1s;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     text-decoration: none;
+//     margin-left: 30px;
+
+//     &:hover {
+//         background-color: #51b2aa;
+//         border: solid 1px #51b2aa;
+//         color: #FFF;
+//     }
+// }
+
+// .table-container {
+//     display: flex;
+//     justify-content: center;
+//     overflow-x: auto;
+//     /* Permite rolagem horizontal */
+// }
+
+// .table {
+//     width: 100%;
+//     border-collapse: separate;
+//     border-spacing: 0;
+//     margin-top: 20px;
+//     border-radius: 0.5rem;
+//     overflow: hidden;
+//     margin-bottom: 100px;
+//     text-align: center;
+// }
+
+// .table th,
+// .table td {
+//     border: 1px solid #ddd;
+//     padding: 8px;
+// }
+
+// .table th {
+//     background-color: #009C86;
+//     color: #ffffff;
+// }
+
+// .bannerImage {
+//     width: auto;
+//     max-width: 100px;
+//     max-height: 100px;
+//     border-radius: 8px;
+//     transition: 0.9s;
+// }
+
+// .filtrar {
+//     margin-top: 40px;
+//     margin-bottom: 10px;
+//     font-size: 16px;
+// }
+
+// .modal {
+//     position: fixed;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     background-color: white;
+//     border-radius: 8px;
+//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+//     padding: 20px;
+//     z-index: 1000;
+//     width: 32rem;
+//     text-align: center;
+
+//     .buttonFechar {
+//         background-color: #d33;
+//         color: white;
+//         border: none;
+//         border-radius: 4px;
+//         padding: 10px;
+//         cursor: pointer;
+//         font-size: 16px;
+//         margin: 5px;
+//         transition: background-color 0.3s;
+
+//         &:hover {
+//             background-color: darken(#d33, 10%);
+//         }
+
+//         &.cancel {
+//             background-color: #d33;
+//         }
+
+//         &.cancel:hover {
+//             background-color: darken(#d33, 10%);
+//         }
+//     }
+
+//     h2 {
+//         margin-bottom: 20px;
+//     }
+
+//     h3 {
+//         text-align: left;
+//     }
+
+//     input {
+//         width: 100%;
+//         padding: 10px;
+//         margin-bottom: 10px;
+//         border: 1px solid #ccc;
+//         border-radius: 4px;
+//         font-size: 16px;
+
+//         &:focus {
+//             border-color: #009C86;
+//             outline: none;
+//         }
+//     }
+
+//     button {
+//         background-color: #009C86;
+//         color: white;
+//         border: none;
+//         border-radius: 4px;
+//         padding: 10px;
+//         cursor: pointer;
+//         font-size: 16px;
+//         margin: 5px;
+//         transition: background-color 0.3s;
+
+//         &:hover {
+//             background-color: darken(#009C86, 10%);
+//         }
+
+//         &.cancel {
+//             background-color: #d33;
+//         }
+
+//         &.cancel:hover {
+//             background-color: darken(#d33, 10%);
+//         }
+//     }
+
+//     .modal-overlay {
+//         position: fixed;
+//         top: 0;
+//         left: 0;
+//         right: 0;
+//         bottom: 0;
+//         background-color: rgba(0, 0, 0, 0.5);
+//         z-index: 999;
+//     }
+// }
+
+// .modalOverlay {
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 100vw;
+//     height: 100vh;
+//     background: rgba(0, 0, 0, 0.5);
+//     backdrop-filter: blur(8px);
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     z-index: 1000;
+// }
+
+// .modal {
+//     background-color: white;
+//     padding: 20px;
+//     border-radius: 8px;
+//     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+//     z-index: 1001;
+//     width: 400px;
+//     max-width: 100%;
+// }

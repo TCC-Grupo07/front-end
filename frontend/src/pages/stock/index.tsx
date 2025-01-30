@@ -8,13 +8,17 @@ import Link from 'next/link';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaCheckCircle, FaExclamationTriangle, FaExclamationCircle } from "react-icons/fa";
+import { FaRegFilePdf } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
+import { jsPDF } from "jspdf";
+import autoTable from "jspdf-autotable";  // Importando o autoTable corretamente
 
-let url = "https://3333-tccgrupo07-backend-x21fabe3q66.ws-us116.gitpod.io";
+let url = "http://localhost:3333";
 
 interface Product {
     id: string;
+    codigo: string,
     name: string;
     quantidade: number;
     price: string;
@@ -32,11 +36,11 @@ interface StockProps {
 
 const Stock: React.FC<StockProps> = ({ products }) => {
     const [selectedSector, setSelectedSector] = useState<string>('Todos');
+    const [searchTerm, setSearchTerm] = useState<string>('');  // Estado para armazenar o termo de pesquisa
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
     const [editProductData, setEditProductData] = useState<Product | null>(null);
     const modalRef = useRef<HTMLDivElement | null>(null);
 
-    // Agrupar produtos por nome do setor com useMemo
     const groupedProducts = useMemo(() => {
         return products.reduce((acc: { [key: string]: Product[] }, product) => {
             const sectorName = product.sector?.name || "Desconhecido";
@@ -47,14 +51,35 @@ const Stock: React.FC<StockProps> = ({ products }) => {
 
     const sectors = ['Todos', ...Object.keys(groupedProducts).sort((a, b) => a.localeCompare(b))];
 
+    const [sortType, setSortType] = useState<'nome' | 'estoque' | null>(null);
+
+    const sortProducts = (productsToSort: Product[]) => {
+        if (sortType === 'nome') {
+            return productsToSort.sort((a, b) => a.name.localeCompare(b.name));
+        } else if (sortType === 'estoque') {
+            return productsToSort.sort((a, b) => {
+                const minA = parseInt(a.quantidadeMin, 10);
+                const minB = parseInt(b.quantidadeMin, 10);
+                return (a.quantidade - minA) - (b.quantidade - minB);
+            });
+        }
+        return productsToSort;
+    };
+
     useEffect(() => {
         const productsToDisplay = selectedSector === 'Todos'
             ? products
             : groupedProducts[selectedSector] || [];
 
-        productsToDisplay.sort((a, b) => a.name.localeCompare(b.name));
-        setFilteredProducts(productsToDisplay);
-    }, [selectedSector, groupedProducts, products]);
+        // Filtrar produtos com base no termo de pesquisa
+        const filteredBySearchTerm = productsToDisplay.filter((product) =>
+            product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            product.codigo.toLowerCase().includes(searchTerm.toLowerCase())  // Permitindo pesquisa pelo código
+        );
+
+        const sortedProducts = sortProducts(filteredBySearchTerm);
+        setFilteredProducts(sortedProducts);
+    }, [selectedSector, groupedProducts, products, sortType, searchTerm]);
 
     const handleDelete = async (product_id: string, product_name: string) => {
         const result = await Swal.fire({
@@ -134,23 +159,112 @@ const Stock: React.FC<StockProps> = ({ products }) => {
         };
     }, []);
 
+    const getStatusIcon = (quantidade: number, quantidadeMin: string) => {
+        const min = parseInt(quantidadeMin, 10);
+        if (quantidade <= min) {
+            return <FaExclamationCircle color="red" size={30} title="Urgência" />;
+        } else if (quantidade > min && quantidade <= min + 20) {
+            return <FaExclamationTriangle color="orange" size={30} title="Atenção" />;
+        } else {
+            return <FaCheckCircle color="green" size={30} title="OK" />;
+        }
+    };
+
+    // Função para gerar o PDF com autoTable e incluir data e hora no nome do arquivo
+    const generatePDF = () => {
+        const doc = new jsPDF();
+        doc.setFontSize(18);
+        doc.text("Controle de Estoque", 20, 20);
+
+        // Obter data e hora atuais
+        const currentDate = new Date();
+        const dateString = currentDate.toLocaleString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+
+        const dateStringPDF = currentDate.toLocaleString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+        });
+
+        // Adicionar a data e hora no canto superior direito
+        doc.setFontSize(10);
+        doc.text(dateString, 180, 20, { align: "right" });
+
+        // Adicionar o nome do setor como subtítulo
+        doc.setFontSize(14);
+        const sectorTitle = selectedSector === 'Todos' ? 'Todos os Setores' : `Setor: ${selectedSector}`;
+        doc.text(sectorTitle, 20, 30);
+
+        const tableColumn = ["Produto", "Código", "Quantidade Mínima", "Quantidade no Estoque", "Status"];
+
+        const getStatus = (quantidade: number, quantidadeMin: string) => {
+            const min = parseInt(quantidadeMin, 10);
+            if (quantidade <= min) {
+                return "Urgente";
+            } else if (quantidade <= min + 20) {
+                return "Atenção";
+            } else {
+                return "OK";
+            }
+        };
+
+        const sortedProducts = filteredProducts.sort((a, b) => {
+            const statusA = getStatus(a.quantidade, a.quantidadeMin);
+            const statusB = getStatus(b.quantidade, b.quantidadeMin);
+
+            const priority = { Urgente: 1, Atenção: 2, OK: 3 };
+
+            return priority[statusA] - priority[statusB];
+        });
+
+        const tableRows = sortedProducts.map(product => [
+            product.name,
+            product.codigo,
+            product.quantidadeMin,
+            product.quantidade,
+            getStatus(product.quantidade, product.quantidadeMin)
+        ]);
+
+        autoTable(doc, {
+            head: [tableColumn],
+            body: tableRows,
+            startY: 40, // Começar a tabela logo após o subtítulo
+        });
+
+        // Gerar o nome do arquivo com a data
+        const fileName = `controle_estoque_${dateStringPDF}.pdf`;
+        doc.save(fileName);
+    };
+
     return (
         <>
             <Head>
                 <title>Controle de Estoque</title>
             </Head>
+
             <div>
                 <Header />
-
                 <main className={styles.container}>
                     <div className={styles.buttons}>
                         <h1>Estoque</h1>
+
                         <Link href="/stock/entry" className={styles.buttonEntry}>
                             Entrada
                         </Link>
                         <Link href="/stock/exit" className={styles.buttonExit}>
                             Saída
                         </Link>
+
+                        <button onClick={generatePDF} className={styles.buttonPDF}>
+                            <FaRegFilePdf />
+                        </button>
                     </div>
 
                     <div className={styles.products}>
@@ -168,6 +282,16 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                                     </option>
                                 ))}
                             </select>
+
+                            {/* Campo de Pesquisa */}
+                            <input
+                                type="text"
+                                placeholder="Pesquisar produto..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className={styles.buscar}
+
+                            />
                         </div>
                         <div className={styles.tabela}>
                             {filteredProducts.length === 0 ? (
@@ -176,10 +300,16 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                                 <table className={styles.table}>
                                     <thead>
                                         <tr>
-                                            <th>Produto</th>
+                                            <th onClick={() => setSortType(sortType === 'nome' ? null : 'nome')} className={styles.cursor}>
+                                                Produto
+                                            </th>
+                                            <th>Código</th>
                                             <th>Quantidade Mínima</th>
-                                            <th>Quantidade no Estoque</th>
+                                            <th onClick={() => setSortType(sortType === 'estoque' ? null : 'estoque')} className={styles.cursor}>
+                                                Quantidade no Estoque
+                                            </th>
                                             <th>Preço</th>
+                                            <th>Status</th>
                                             <th>Imagem</th>
                                             <th>Ações</th>
                                         </tr>
@@ -188,9 +318,11 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                                         {filteredProducts.map((product) => (
                                             <tr key={product.id}>
                                                 <td>{product.name}</td>
+                                                <td>{product.codigo}</td>
                                                 <td>{product.quantidadeMin}</td>
                                                 <td>{product.quantidade}</td>
                                                 <td>R$ {product.price}</td>
+                                                <td>{getStatusIcon(product.quantidade, product.quantidadeMin)}</td>
                                                 <td className={styles.imagem}>
                                                     <img
                                                         src={`${url}/files/${product.banner}`}
@@ -203,7 +335,7 @@ const Stock: React.FC<StockProps> = ({ products }) => {
                                                 <td>
                                                     <MdEdit
                                                         className={styles.editButton}
-                                                        color=' #1a77e1' size={25}
+                                                        color='#1a77e1' size={25}
                                                         onClick={() => handleEdit(product)} />
                                                     <FaTrash
                                                         className={styles.deleteButton}

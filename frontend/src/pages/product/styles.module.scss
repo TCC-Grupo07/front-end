@@ -1,7 +1,7 @@
 .container {
     max-width: 720px;
     margin: 4rem auto;
-    padding: 0 2 rem;
+    padding: 0 2rem;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -14,6 +14,8 @@
 .preview {
     max-width: 250px;
     max-height: 250px;
+    object-fit: cover;
+    /* Garante que a imagem tenha o tamanho adequado */
 }
 
 .form {
@@ -34,18 +36,20 @@
         height: 40px;
         border-radius: 0.5rem;
         margin-bottom: 1rem;
-        color: var(--white);
-        // background-color: var(--dark-900);
+        color: black;
         border: 1px solid black;
         padding: 0 0.5rem;
     }
 }
 
+
+
+
+
 .input {
     border-radius: 0.5rem;
     margin-bottom: 1rem;
     color: black;
-    // background-color: ;
     border: 1px solid black;
     height: 40px;
     padding: 0 0.5rem;
@@ -75,14 +79,11 @@
         border: solid 1px #51b2aa;
         color: #FFF;
     }
-
 }
-
 
 .labelAvatar {
     width: 100%;
     height: 280px;
-    // background-color: var(--dark-900);
     margin-bottom: 1rem;
     border-radius: 0.5rem;
     display: flex;
@@ -90,6 +91,7 @@
     align-items: center;
     cursor: pointer;
     border: solid 1px black;
+    position: relative;
 
     input {
         display: none;
@@ -106,4 +108,88 @@
         opacity: 1;
         transform: scale(1.2);
     }
+}
+
+/* Responsividade - Ajustes para telas menores */
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem;
+        /* Menos padding em telas menores */
+    }
+
+    .form {
+        margin: 1rem 0;
+
+        .input,
+        select {
+            height: 45px;
+            /* Aumenta o tamanho dos campos para telas menores */
+        }
+    }
+
+
+
+    .buttonAdd {
+        font-size: 18px;
+        /* Reduz o tamanho da fonte do botão */
+        height: 40px;
+    }
+
+    .labelAvatar {
+        height: 200px;
+        /* Reduz a altura da área de imagem */
+    }
+
+    .preview {
+        max-width: 200px;
+        /* Ajusta o tamanho da pré-visualização */
+        max-height: 200px;
+
+        h1 {
+            font-size: 1.5rem;
+            /* Reduz o tamanho do título */
+        }
+    }
+
+
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+        /* Menos padding para telas muito pequenas */
+
+        .input,
+        select {
+            height: 50px;
+            /* Ajusta o tamanho dos campos para dispositivos pequenos */
+        }
+    }
+
+
+
+    .buttonAdd {
+        font-size: 16px;
+        /* Ajusta o tamanho do botão */
+        height: 40px;
+    }
+
+    .labelAvatar {
+        height: 180px;
+        /* Ajusta a altura da área de imagem */
+    }
+
+    .preview {
+        max-width: 180px;
+        /* Ajusta o tamanho da imagem pré-visualizada */
+        max-height: 180px;
+
+
+        h1 {
+            font-size: 1.3rem;
+            /* Ajusta o tamanho do título */
+        }
+    }
+
 }
